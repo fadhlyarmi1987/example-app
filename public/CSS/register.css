@@ -1,0 +1,163 @@
+body {
+    font-family: sans-serif;
+    margin: 0%;
+    background-image: linear-gradient(to right, #5292C1, #27455B);
+  }
+
+  .header-bar {
+    background: linear-gradient(to bottom, #5292C1, #27455B); /* Perbaiki warna latar belakang */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.header-bar .logo-atas {
+    max-width: 30px; /* Atur ukuran maksimum gambar logo */
+    height: auto; /* Pertahankan rasio aspek gambar */
+}
+
+.header-bar .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.header-bar .nav-links a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 500px;
+    margin-left: 0px auto;
+    margin-right: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: linear-gradient(to right, #5292C1, #27455B);
+    /* background-image: linear-gradient(to right, #5292C1, #27455B); */
+
+    }
+
+.container-imgbanner img {
+        width: 1170px; /* Mengatur lebar gambar agar 100% dari lebar container */
+        height: 100%; /* Mempertahankan rasio aspek gambar */
+    }
+
+.container-img {
+        align-items: center;
+        border-color: linear-gradient(to right, #5292C1, #27455B);
+        padding: 20px;
+        height: 95px;
+    }
+
+.container-combine {
+        display: flex;
+        margin-left: 0%;
+        align-items: center;
+        justify-content: center;
+    }
+
+.login-box {
+    margin-left: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    size: 20;
+    margin: 20px 0;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    color: white;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border-radius: 50px; /* Adjusted radius */
+    border: 1px solid #ccc;
+}
+
+.input-group p {
+    margin: 15px 0 0;
+}
+
+/* label {
+    display: block;
+    margin-bottom: 5px;
+} */
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+button.btn {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button.btn:hover {
+    background-color: white;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background-color: #4CAF50; /* Green */
+}
+
+.alert-danger {
+    background-color: #f44336; /* Red */
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+
