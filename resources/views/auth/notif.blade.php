@@ -17,6 +17,7 @@
 
         .sidebar {
             width: 280px;
+            
         }
 
         .content-container {
@@ -159,19 +160,44 @@
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="karyawan"></use>
+                        </svg>
                         Data Karyawan
                     </a>
                 </li>
                 <li>
-                    <a href="magang" class="nav-link text-black">Data Magang</a>
+                    <a href="magang" class="nav-link text-black">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="magang"></use>
+                        </svg>
+                        Data Magang
+                    </a>
                 </li>
                 <li>
-                    <a href="absen" class="nav-link text-black">List Absensi</a>
+                    <a href="absen" class="nav-link text-black">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="absen"></use>
+                        </svg>
+                        List Absensi
+                    </a>
                 </li>
-                <a href="notif" class="nav-link active">Notifikasi</a>
+                <a href="notif" class="nav-link active">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="notif"></use>
+                    </svg>
+                    Notifikasi
+                </a>
+                </li>
                 <li>
-                    <a href="tugas" class="nav-link text-black">Tugas</a>
+                    <a href="tugas" class="nav-link text-black">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="tugas"></use>
+                        </svg>
+                        Tugas
+                    </a>
                 </li>
+
             </ul>
             <hr>
             <a href="login" class="nav-link text-black">
