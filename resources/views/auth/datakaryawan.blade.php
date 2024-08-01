@@ -133,7 +133,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="editJabatan" class="form-label">Jabatan</label>
-                                <input type="text" class="form-control" id="editJabatan" required>
+                                <select class="form-select" id="editJabatan" required>
+                                    <option value="" disabled selected>Pilih Jabatan</option>
+                                    <option value="Karyawan">Karyawan</option>
+                                    <option value="Magang">Magang</option>
+                                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
