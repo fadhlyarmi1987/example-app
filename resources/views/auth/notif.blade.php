@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
     <link rel="stylesheet" href="{{ asset('css/datamagang1.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -208,23 +207,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($announcements as $announcement)
-                                    <tr data-id="{{ $announcement->id }}">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $announcement->pengumuman }}</td>
-                                        <td>{{ $announcement->tanggal_unggah }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-btn" data-id="{{ $announcement->id }}"><i class="fas fa-edit"></i> Edit</button>
-                                            <form action="{{ route('notifications.destroy', $announcement->id) }}" method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger delete-btn" data-id="{{ $announcement->id }}"><i class="fas fa-trash-alt"></i> Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                @foreach ($notifications as $notification)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $notification->pengumuman }}</td>
+                                    <td>{{ $notification->created_at }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-info edit-btn" data-id="{{ $notification->id }}" data-pengumuman="{{ $notification->pengumuman }}" data-tanggal_unggah="{{ $notification->created_at->format('Y-m-d') }}">
+                                            Edit
+                                        </button>
+                                        <form action="{{ route('notifications.destroy', $notification->id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="{{ $notification->id }}">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+
+
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -247,10 +253,7 @@
                                 <label for="editText">Pengumuman</label>
                                 <textarea class="form-control" id="editText" name="pengumuman" rows="3"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="editDate">Tanggal Unggah</label>
-                                <input type="date" class="form-control" id="editDate" name="tanggal_unggah">
-                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -261,26 +264,32 @@
             </div>
         </div>
 
-        <!-- Modal Hapus -->
-        <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+        <!-- Modal Delete -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Penghapusan</h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        Apakah Anda yakin ingin menghapus pengumuman ini?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="confirmDelete">Hapus</button>
-                    </div>
+                    <form id="deleteForm" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-body">
+                            <p>Apakah Anda yakin ingin menghapus pengumuman ini?</p>
+                            <input type="hidden" id="deleteId" name="id">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <!-- jQuery and Bootstrap JS -->
+
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -288,60 +297,36 @@
 
         <script>
             $(document).ready(function() {
-                let currentEditId;
+                // Handler for edit button
+                $('.edit-btn').click(function() {
+                    var id = $(this).data('id');
+                    var pengumuman = $(this).data('pengumuman');
+                    var tanggal_unggah = $(this).data('tanggal_unggah');
+                    var url = "{{ route('notifications.update', ':id') }}";
+                    url = url.replace(':id', id);
 
-                // Handle Edit button click
-                $('.edit-btn').on('click', function() {
-                    currentEditId = $(this).data('id');
-                    let row = $(this).closest('tr');
-                    let announcement = row.find('td').eq(1).text();
-                    let date = row.find('td').eq(2).text();
-
-                    $('#editId').val(currentEditId);
-                    $('#editText').val(announcement);
-                    $('#editDate').val(date);
-
+                    $('#editForm').attr('action', url);
+                    $('#editId').val(id);
+                    $('#editText').val(pengumuman);
+                    $('#editDate').val(tanggal_unggah);
                     $('#editModal').modal('show');
                 });
 
-                // Handle Edit form submission
-                $('#editModal').on('submit', function(event) {
-                    event.preventDefault();
-                    let id = $('#editId').val();
-                    let url = "{{ url('notifications') }}/" + id;
-                    let formData = $(this).serialize();
+                // Handler for delete button
+                $('.delete-btn').click(function() {
+                    var id = $(this).data('id');
+                    var url = "{{ route('notifications.destroy', ':id') }}";
+                    url = url.replace(':id', id);
 
-                    $.ajax({
-                        url: url,
-                        method: 'PUT',
-                        data: formData,
-                        success: function(response) {
-                            location.reload();
-                        }
-                    });
-                });
-
-                // Handle Delete button click
-                $('.delete-btn').on('click', function() {
-                    currentEditId = $(this).data('id');
-                    $('#hapusModal').modal('show');
-                });
-
-                // Handle Delete confirmation
-                $('#confirmDelete').on('click', function() {
-                    let url = "{{ url('notifications') }}/" + currentEditId;
-                    $.ajax({
-                        url: url,
-                        method: 'DELETE',
-                        data: {
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            location.reload();
-                        }
-                    });
+                    $('#deleteForm').attr('action', url);
+                    $('#deleteId').val(id);
+                    $('#deleteModal').modal('show');
                 });
             });
         </script>
+
+
+
 </body>
+
 </html>

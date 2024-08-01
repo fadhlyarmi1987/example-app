@@ -1,55 +1,55 @@
 <?php
 
-namespace App\Http\Controllers;
+// namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Announcement;
+// use Illuminate\Http\Request;
+// use App\Models\Announcement;
 
-class AnnouncementController extends Controller
-{
-    public function index()
-    {
-        $announcements = Announcement::all();
-        return view('auth.notif', compact('announcements'));
-    }
+// class AnnouncementController extends Controller
+// {
+//     public function index()
+//     {
+//         $announcements = Announcement::all();
+//         return view('auth.notif', compact('announcements'));
+//     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'pengumuman' => 'required',
-        ]);
+//     public function store(Request $request)
+//     {
+//         $request->validate([
+//             'pengumuman' => 'required',
+//         ]);
 
-        Announcement::create([
-            'pengumuman' => $request->pengumuman,
-            'tanggal_unggah' => now(),
-        ]);
+//         Announcement::create([
+//             'pengumuman' => $request->pengumuman,
+//             'tanggal_unggah' => now(),
+//         ]);
 
-        return redirect()->route('notifications.index');
-    }
+//         return redirect()->route('notifications.index');
+//     }
 
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'pengumuman' => 'required|string',
-        'tanggal_unggah' => 'required|date',
-    ]);
+//     public function update(Request $request, $id)
+// {
+//     $request->validate([
+//         'pengumuman' => 'required|string',
+//         'tanggal_unggah' => 'required|date',
+//     ]);
 
-    $announcement = Announcement::findOrFail($id);
-    $announcement->update([
-        'pengumuman' => $request->pengumuman,
-        'tanggal_unggah' => $request->tanggal_unggah,
-    ]);
-    return redirect()->route('notifications.index')->with('success', 'Announcement deleted successfully');
-    //return response()->json(['message' => 'Announcement updated successfully']);
-}
+//     $announcement = Announcement::findOrFail($id);
+//     $announcement->update([
+//         'pengumuman' => $request->pengumuman,
+//         'tanggal_unggah' => $request->tanggal_unggah,
+//     ]);
+//     return redirect()->route('notifications.index')->with('success', 'Announcement deleted successfully');
+//     //return response()->json(['message' => 'Announcement updated successfully']);
+// }
 
 
-    public function destroy($id)
-    {
-        $announcement = Announcement::findOrFail($id);
-        $announcement->delete();
+//     public function destroy($id)
+//     {
+//         $announcement = Announcement::findOrFail($id);
+//         $announcement->delete();
 
-        return redirect()->route('notifications.index')->with('success', 'Announcement deleted successfully');
+//         return redirect()->route('notifications.index')->with('success', 'Announcement deleted successfully');
 
-    }
-}
+//     }
+// }
