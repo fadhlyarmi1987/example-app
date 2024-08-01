@@ -35,3 +35,4 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.user
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
 
 Route::get('/listabsenuser', [AbsensiController::class, 'userid']);
+//test
