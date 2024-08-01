@@ -24,21 +24,34 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 // Route::get('/magang', [AuthController::class, 'magang'])->name('magang');
 
 Route::get('/absen', [AuthController::class, 'absen'])->name('absen');
+
 Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
+
 Route::get('/tugas', [AuthController::class, 'tugas'])->name('tugas');
+
 Route::get('/getAttendance', [AuthController::class, 'getAttendance'])->name('getAttendance');
+
 Route::get('/beranda', [BerandaController::class, 'beranda']);
+
 Route::get('/penjumlahan', [BerandaController::class, 'penjumlahan']);
+
 Route::get('/tugas', [FileController::class, 'index']);
+
 Route::get('/unduh/{id}', [FileController::class, 'download']);
+
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')->name('beranda');
+
 Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
 
 //method POST
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit'); // Menambahkan route post untuk register
+
 Route::post('/upload', [FileController::class, 'store']);
+
 Route::post('/updateKaryawan', [KaryawanController::class, 'update']);
+
 Route::post('/deleteKaryawan', [KaryawanController::class, 'destroy']);
 
 Route::post('/deleteMagang', [MagangController::class, 'destroy']);
@@ -46,6 +59,7 @@ Route::post('/deleteMagang', [MagangController::class, 'destroy']);
 Route::post('/updateMagang', [MagangController::class, 'update']);
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::post('/notif', [AnnouncementController::class, 'store'])->name('notifications.store');
 
 //method PUT
@@ -53,7 +67,9 @@ Route::put('/notif/{id}', [AnnouncementController::class, 'update'])->name('noti
 
 // Route method DELETE
 Route::delete('/notif', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
+
 Route::delete('/hapus/{id}', [FileController::class, 'destroy']);
+
 Route::delete('/notifications/{id}', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
 
 // Rute yang dilindungi oleh middleware auth
