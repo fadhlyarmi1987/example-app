@@ -185,12 +185,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
         crossorigin="anonymous"></script>
 
-    <script>
+        <script>
         $(document).ready(function() {
+            const apiUrl = 'http://192.168.64.139:8000/api/users'; 
 
             function fetchData() {
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users',
+                    url: apiUrl,
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -228,7 +229,7 @@
                 var modal = $(this);
 
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users/' + id,
+                    url: apiUrl + '/' + id,
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -251,7 +252,7 @@
                 var jabatan = $('#editJabatan').val();
 
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users/' + id,
+                    url: apiUrl + '/' + id,
                     method: 'PUT',
                     data: {
                         name: nama,
@@ -278,7 +279,7 @@
                 var id = $(this).data('id');
 
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users/' + id,
+                    url: apiUrl + '/' + id,
                     method: 'DELETE',
                     success: function() {
                         $('#hapusModal').modal('hide');

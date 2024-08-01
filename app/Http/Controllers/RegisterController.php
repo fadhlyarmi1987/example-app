@@ -29,7 +29,7 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
-        // Buat pengguna baru
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -37,7 +37,8 @@ class RegisterController extends Controller
             'user_type' => $request->user_type,
         ]);
 
-        // Arahkan ke halaman login
+        
         return redirect()->route('login')->with('success', 'Pendaftaran berhasil. Silakan login.');
+       
     }
 }

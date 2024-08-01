@@ -293,5 +293,3 @@
     </script>
 </body>
 </html>
-
-//amannnnn
