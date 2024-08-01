@@ -153,81 +153,44 @@
     <div class="main-container">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
             <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
                 <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="karyawan"></use>
-                        </svg>
                         Data Karyawan
                     </a>
                 </li>
                 <li>
-                    <a href="magang" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="magang"></use>
-                        </svg>
-                        Data Magang
-                    </a>
+                    <a href="magang" class="nav-link text-black">Data Magang</a>
                 </li>
                 <li>
-                    <a href="absen" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="absen"></use>
-                        </svg>
-                        List Absensi
-                    </a>
+                    <a href="absen" class="nav-link text-black">List Absensi</a>
                 </li>
-                <a href="notif" class="nav-link active">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="notif"></use>
-                    </svg>
-                    Notifikasi
-                </a>
-                </li>
+                <a href="notif" class="nav-link active">Notifikasi</a>
                 <li>
-                    <a href="tugas" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="tugas"></use>
-                        </svg>
-                        Tugas
-                    </a>
+                    <a href="tugas" class="nav-link text-black">Tugas</a>
                 </li>
-
             </ul>
             <hr>
-
             <a href="login" class="nav-link text-black">
-                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
-                    class="rounded-circle me-2">
+                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>Keluar</strong>
             </a>
-
         </div>
 
         <div class="main-content">
             <div class="header">
                 <h1>NOTIFICATION</h1>
-                {{-- <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-info" type="submit">Search</button>
-                </form> --}}
             </div>
-
-
-            @csrf
-            <div class="mb-3">
-                {{-- <label for="pengumuman" class="form-label"></label> --}}
-                <textarea class="form-control" id="pengumuman" name="pengumuman" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-info">Upload</button>
-
+            <form action="{{ route('notifications.store') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <textarea class="form-control" id="pengumuman" name="pengumuman" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info">Upload</button>
+            </form>
 
             <div class="content">
                 <div class="card">
@@ -244,31 +207,22 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody id="fileTableBody">
-                                <!-- Contoh data, nanti bisa diganti dengan data dinamis dari server -->
-                                <tr>
-                                    <td>1</td>
-                                    <td>Hari Senin Jam 10:00 WIB Kita akan mengadakan rapat bulanan</td>
-                                    <td>25 Juli 2024</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-info edit-btn" data-id="1"><i
-                                                class="fas fa-edit"></i> Edit</button>
-                                        <button type="button" class="btn btn-sm btn-danger delete-btn"
-                                            data-id="1"><i class="fas fa-trash-alt"></i> Hapus</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Deadline pengerjaan web untuk dinas lingkungan hidup mojokerto hari jum at
-                                        tanggal 2 agustus 2024</td>
-                                    <td>29 Juli 2024</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-info edit-btn" data-id="1"><i
-                                                class="fas fa-edit"></i> Edit</button>
-                                        <button type="button" class="btn btn-sm btn-danger delete-btn"
-                                            data-id="1"><i class="fas fa-trash-alt"></i> Hapus</button>
-                                    </td>
-                                </tr>
+                            <tbody>
+                                @foreach ($announcements as $announcement)
+                                    <tr data-id="{{ $announcement->id }}">
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $announcement->pengumuman }}</td>
+                                        <td>{{ $announcement->tanggal_unggah }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info edit-btn" data-id="{{ $announcement->id }}"><i class="fas fa-edit"></i> Edit</button>
+                                            <form action="{{ route('notifications.destroy', $announcement->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger delete-btn" data-id="{{ $announcement->id }}"><i class="fas fa-trash-alt"></i> Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -277,25 +231,25 @@
         </div>
 
         <!-- Modal Edit -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Edit Pengumuman</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                        </button>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="editForm">
+                    <form id="editForm" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="modal-body">
-                            <input type="hidden" id="editId">
+                            <input type="hidden" id="editId" name="id">
                             <div class="form-group">
                                 <label for="editText">Pengumuman</label>
-                                <textarea class="form-control" id="editText" rows="3"></textarea>
+                                <textarea class="form-control" id="editText" name="pengumuman" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="editDate">Tanggal Unggah</label>
-                                <input type="date" class="form-control" id="editDate">
+                                <input type="date" class="form-control" id="editDate" name="tanggal_unggah">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -308,14 +262,12 @@
         </div>
 
         <!-- Modal Hapus -->
-        <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="hapusModalLabel">Konfirmasi Hapus</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                        </button>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Apakah Anda yakin ingin menghapus pengumuman ini?
@@ -332,7 +284,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <!-- Font Awesome -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 
         <script>
@@ -357,15 +308,17 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
                     let id = $('#editId').val();
-                    let announcement = $('#editText').val();
-                    let date = $('#editDate').val();
+                    let url = "{{ url('notifications') }}/" + id;
+                    let formData = $(this).serialize();
 
-                    // Update the table (in real application, send data to server)
-                    let row = $('tr[data-id="' + id + '"]');
-                    row.find('td').eq(1).text(announcement);
-                    row.find('td').eq(2).text(date);
-
-                    $('#editModal').modal('hide');
+                    $.ajax({
+                        url: url,
+                        method: 'PUT',
+                        data: formData,
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
                 });
 
                 // Handle Delete button click
@@ -376,12 +329,19 @@
 
                 // Handle Delete confirmation
                 $('#confirmDelete').on('click', function() {
-                    // Delete the row (in real application, send delete request to server)
-                    $('tr[data-id="' + currentEditId + '"]').remove();
-                    $('#hapusModal').modal('hide');
+                    let url = "{{ url('notifications') }}/" + currentEditId;
+                    $.ajax({
+                        url: url,
+                        method: 'DELETE',
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
                 });
             });
         </script>
 </body>
-
 </html>

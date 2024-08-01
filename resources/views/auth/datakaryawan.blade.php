@@ -140,33 +140,48 @@
                                     <!-- Tambahkan opsi lain sesuai kebutuhan -->
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </form>
-                    </div>
+                            {{-- <div class="dropdown-center">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Centered dropdown
+                                </button>
+                                <ul for="editJabatan" class="dropdown-menu" id="editJabatan">
+                                    <li value="karyawan"><a class="dropdown-item" href="#">Karyawan</a></li>
+                                    <li value="magang"><a class="dropdown-item" href="#">Magang</a></li>
+                                </ul>
+                                <select class="form-select" id="editJabatan" required>
+                                    <option value="" disabled selected>Pilih Jabatan</option>
+                                    <option value="Karyawan">Karyawan</option>
+                                    <option value="Magang">Magang</option>
+                                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
+                                </select>
+                            </div>
+                    </div> --}}
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Hapus Modal -->
-        <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="hapusModalLabel">Hapus Data Karyawan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Anda yakin ingin menghapus data karyawan ini?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="hapusBtn">Hapus</button>
-                    </div>
+    <!-- Hapus Modal -->
+    <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hapusModalLabel">Hapus Data Karyawan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Anda yakin ingin menghapus data karyawan ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="hapusBtn">Hapus</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -177,7 +192,7 @@
 
     <script>
         $(document).ready(function() {
-            
+
             function fetchData() {
                 $.ajax({
                     url: 'http://127.0.0.1:8000/api/users',
