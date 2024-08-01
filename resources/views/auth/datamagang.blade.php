@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
     <link rel="stylesheet" href="{{ asset('css/datakaryawan.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
     <header class="header-bar">
         <div class="logo">
@@ -62,7 +65,8 @@
             </ul>
             <hr>
             <a href="login" class="nav-link text-black">
-                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
+                    class="rounded-circle me-2">
                 <strong>Keluar</strong>
             </a>
         </div>
@@ -71,7 +75,8 @@
             <div class="header">
                 <h1>LIST DATA MAGANG</h1>
                 <form action="/magang" class="d-flex" role="search" method="GET">
-                    <input class="form-control me-2" type="search" name='search' placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" name='search' placeholder="Search"
+                        aria-label="Search">
                     <button class="btn btn-info" type="submit">Search</button>
                 </form>
             </div>
@@ -99,8 +104,11 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->user_type }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $user->id }}">Edit</button>
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusModal" data-id="{{ $user->id }}">Hapus</button>
+                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#editModal" data-id="{{ $user->id }}">Edit</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#hapusModal"
+                                                data-id="{{ $user->id }}">Hapus</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -118,7 +126,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Edit Data Karyawan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="editForm">
@@ -148,12 +157,14 @@
         </div>
 
         <!-- Hapus Modal -->
-        <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
+        <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="hapusModalLabel">Hapus Data Karyawan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p>Anda yakin ingin menghapus data karyawan ini?</p>
@@ -169,7 +180,8 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
+        crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
             function fetchData() {
@@ -188,8 +200,10 @@
                                 row.append('<td>' + karyawan.email + '</td>');
                                 row.append('<td>' + karyawan.user_type + '</td>');
                                 row.append('<td>' +
-                                    '<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-id="' + karyawan.id + '">Edit</button> ' +
-                                    '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusModal" data-id="' + karyawan.id + '">Hapus</button>' +
+                                    '<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-id="' +
+                                    karyawan.id + '">Edit</button> ' +
+                                    '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusModal" data-id="' +
+                                    karyawan.id + '">Hapus</button>' +
                                     '</td>');
                                 tableBody.append(row);
                             }
@@ -271,4 +285,5 @@
         });
     </script>
 </body>
+
 </html>

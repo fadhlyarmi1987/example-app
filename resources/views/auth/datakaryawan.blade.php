@@ -22,9 +22,6 @@
     <div class="main-container">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
             <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
                 <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
             </a>
             <hr>
@@ -85,7 +82,7 @@
                 <form action="/karyawan" class="d-flex" role="search" method="GET">
                     <input class="form-control me-2" type="search" name="search" placeholder="Search by name or ID" aria-label="Search">
                     <button class="btn btn-info" type="submit">Search</button>
-                </form>                
+                </form>
             </div>
 
             <div class="content">
@@ -192,7 +189,7 @@
 
         <script>
         $(document).ready(function() {
-            const apiUrl = 'http://192.168.64.139:8000/api/users'; 
+            const apiUrl = 'http://127.0.0.1:8000/api/users';
 
             function fetchData() {
                 $.ajax({
