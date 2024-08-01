@@ -55,4 +55,4 @@ Route::middleware(['user_type'])->group(function () {
     // Tambahkan semua rute lain yang ingin dilindungi disini
 });
 
-//test2
+//test23
