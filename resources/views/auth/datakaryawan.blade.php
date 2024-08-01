@@ -172,7 +172,7 @@
 
     <script>
         $(document).ready(function() {
-            // Fungsi untuk mengambil data dari API dan mengisi tabel
+            
             function fetchData() {
                 $.ajax({
                     url: 'http://127.0.0.1:8000/api/users',
