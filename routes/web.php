@@ -54,5 +54,3 @@ Route::middleware(['user_type'])->group(function () {
     Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
     // Tambahkan semua rute lain yang ingin dilindungi disini
 });
-
-//piyee enak e
