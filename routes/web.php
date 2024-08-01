@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\MagangController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +21,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
-Route::get('/magang', [AuthController::class, 'magang'])->name('magang');
+// Route::get('/magang', [AuthController::class, 'magang'])->name('magang');
 
 Route::get('/absen', [AuthController::class, 'absen'])->name('absen');
 
@@ -53,6 +54,10 @@ Route::post('/updateKaryawan', [KaryawanController::class, 'update']);
 
 Route::post('/deleteKaryawan', [KaryawanController::class, 'destroy']);
 
+Route::post('/deleteMagang', [MagangController::class, 'destroy']);
+
+Route::post('/updateMagang', [MagangController::class, 'update']);
+
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
@@ -75,5 +80,7 @@ Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')-
 Route::middleware(['user_type'])->group(function () {
 
     Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
+
+    Route::get('/magang', [MagangController::class, 'magang'])->name('magang');
     // Tambahkan semua rute lain yang ingin dilindungi disini
 });

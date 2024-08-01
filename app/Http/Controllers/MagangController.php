@@ -6,31 +6,30 @@ use Illuminate\Http\Request;
 use App\Models\Karyawan; // Sesuaikan dengan model yang Anda gunakan
 use App\Models\User;
 
-class KaryawanController extends Controller
+class MagangController extends Controller
 {
     public function __construct()
     {
         $this->middleware('user_type');
     }
 
-    public function index(Request $request){
+    // public function index(Request $request)
+    // {
+    //     return view('auth.datamagang');
+    // }
 
-        return view('auth.datakaryawan');
-
-    }
-
-    public function karyawan(Request $request) {
-
-            if($request->has('search')){
-                $data = User::where('user_type', 'Karyawan')
-                            ->where('name', 'like', '%' . $request->search . '%')
-                            ->paginate(5);
-            } else {
-                $data = User::where('user_type', 'Karyawan')->paginate(5);
-            }
-
-            return view('auth.datakaryawan', ['data' => $data]);
+    public function magang(Request $request)
+    {
+        if($request->has('search')){
+            $data = User::where('user_type', 'Magang')
+                        ->where('name', 'like', '%' . $request->search . '%')
+                        ->paginate(5);
+        } else {
+            $data = User::where('user_type', 'Magang')->paginate(5);
         }
+
+        return view('auth.datamagang', ['data' => $data]);
+    }
 
     // Metode untuk memperbarui data karyawan
     public function update(Request $request, $id)
@@ -55,7 +54,7 @@ class KaryawanController extends Controller
         $karyawan->jabatan = $request->input('jabatan');
         $karyawan->save();
 
-        return response()->json(['message' => 'Data karyawan berhasil diperbarui', 'karyawan' => $karyawan], 200);
+        return response()->json(['message' => 'Data Magang berhasil diperbarui', 'Magang' => $karyawan], 200);
     }
 
     // Metode untuk menghapus data karyawan
