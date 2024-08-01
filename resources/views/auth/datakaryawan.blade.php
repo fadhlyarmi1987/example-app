@@ -89,41 +89,41 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>Data Karyawan</h2>
-            </div>
-            <div class="card-body">
-                <table class="table table-striped" id="karyawanTable">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Jabatan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $user)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->user_type }}</td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#editModal" data-id="{{ $user->id }}">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#hapusModal"
-                                        data-id="{{ $user->id }}">Hapus</button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{ $data->links() }}
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped" id="karyawanTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Jabatan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $user)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->user_type }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#editModal" data-id="{{ $user->id }}">Edit</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#hapusModal"
+                                                data-id="{{ $user->id }}">Hapus</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $data->links() }}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
         <!-- Edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -131,7 +131,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Edit Data Karyawan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="editForm">
@@ -153,23 +154,6 @@
                                     <!-- Tambahkan opsi lain sesuai kebutuhan -->
                                 </select>
                             </div>
-                            {{-- <div class="dropdown-center">
-                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Centered dropdown
-                                </button>
-                                <ul for="editJabatan" class="dropdown-menu" id="editJabatan">
-                                    <li value="karyawan"><a class="dropdown-item" href="#">Karyawan</a></li>
-                                    <li value="magang"><a class="dropdown-item" href="#">Magang</a></li>
-                                </ul>
-                                <select class="form-select" id="editJabatan" required>
-                                    <option value="" disabled selected>Pilih Jabatan</option>
-                                    <option value="Karyawan">Karyawan</option>
-                                    <option value="Magang">Magang</option>
-                                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
-                                </select>
-                            </div>
-                    </div> --}}
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
                     </div>
@@ -209,7 +193,7 @@
         $(document).ready(function() {
             function fetchData() {
                 $.ajax({
-                    url: 'http://127.0.0.1:8000//api/users?user_type=magang',
+                    url: 'http://127.0.0.1:8000//api/users?user_type=karyawan',
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -241,29 +225,12 @@
             // Panggil fetchData saat halaman dimuat
             fetchData();
 
-            // Tangani event submit dari form pencarian
-            $('#searchForm').submit(function(event) {
-                event.preventDefault(); // Mencegah submit form secara tradisional
-                var query = $('#searchInput').val(); // Ambil nilai input pencarian
-                fetchData(query); // Panggil fetchData dengan parameter pencarian
-            });
-
-            // Panggil fetchData saat halaman dimuat
-            fetchData();
-
             $('#editModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-
-                $('form[role="search"]').submit(function(event) {
-                    event.preventDefault();
-                    var query = $(this).find('input[name="search"]').val();
-                    fetchData(query);
-                });
-
                 $.ajax({
-                    url: apiUrl + '/' + id,
+                    url: 'http://127.0.0.1:8000/api/users/' + id,
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -284,9 +251,8 @@
                 var nama = $('#editNama').val();
                 var email = $('#editEmail').val();
                 var jabatan = $('#editJabatan').val();
-
                 $.ajax({
-                    url: apiUrl + '/' + id,
+                    url: 'http://127.0.0.1:8000/api/users/' + id,
                     method: 'PUT',
                     data: {
                         name: nama,
@@ -311,9 +277,8 @@
 
             $('#hapusBtn').click(function() {
                 var id = $(this).data('id');
-
                 $.ajax({
-                    url: apiUrl + '/' + id,
+                    url: 'http://127.0.0.1:8000/api/users/' + id,
                     method: 'DELETE',
                     success: function() {
                         $('#hapusModal').modal('hide');
@@ -326,5 +291,7 @@
             });
         });
     </script>
+</body>
 
-</body </html>
+</html>
+

@@ -75,7 +75,7 @@
             <div class="header">
                 <h1>LIST DATA MAGANG</h1>
                 <form action="/magang" class="d-flex" role="search" method="GET">
-                    <input class="form-control me-2" type="search" name='search' placeholder="Search"
+                    <input class="form-control me-2" type="search" name='search' placeholder="Search by name or ID"
                         aria-label="Search">
                     <button class="btn btn-info" type="submit">Search</button>
                 </form>
