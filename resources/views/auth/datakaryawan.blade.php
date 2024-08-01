@@ -83,9 +83,9 @@
             <div class="header">
                 <h1>LIST DATA KARYAWAN</h1>
                 <form action="/karyawan" class="d-flex" role="search" method="GET">
-                    <input class="form-control me-2" type="search" name='search' placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search by name or ID" aria-label="Search">
                     <button class="btn btn-info" type="submit">Search</button>
-                </form>
+                </form>                
             </div>
 
             <div class="content">
@@ -177,6 +177,7 @@
                 $.ajax({
                     url: 'http://127.0.0.1:8000/api/users',
                     method: 'GET',
+                    // data: { search: all },
                     dataType: 'json',
                     success: function(data) {
                         var tableBody = $('#karyawanTable tbody');
@@ -204,6 +205,15 @@
                 });
             }
 
+            fetchData();
+
+        // Tangani event submit dari form pencarian
+        $('#searchForm').submit(function(event) {
+            event.preventDefault(); // Mencegah submit form secara tradisional
+            var query = $('#searchInput').val(); // Ambil nilai input pencarian
+            fetchData(query); // Panggil fetchData dengan parameter pencarian
+        });
+
             // Panggil fetchData saat halaman dimuat
             fetchData();
 
@@ -211,6 +221,12 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
+
+                $('form[role="search"]').submit(function(event) {
+        event.preventDefault();
+        var query = $(this).find('input[name="search"]').val();
+        fetchData(query);
+    });
 
                 $.ajax({
                     url: 'http://127.0.0.1:8000/api/users/' + id,

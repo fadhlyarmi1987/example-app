@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-//use App\Http\Controllers\Controller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -11,47 +10,45 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('search');
+
         $users = User::all();
-        return response()->json($users);
+
+    return response()->json($users);
     }
 
     public function show($id)
-{
-    $user = User::find($id);
+    {
+        $user = User::find($id);
     
-    if (!$user) {
-        return response()->json(['message' => 'User not found'], 404);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        return response()->json($user);
     }
 
-    return response()->json($user);
-}
-
-    public function login (Request $request){
-
+    public function login(Request $request)
+    {
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
     
-        // Ambil data dari request
-        $username = $request->input('username');
-        $password = $request->input('password');
-
-        $user = User::where('email', $username)->first();
-
+        $user = User::where('email', $request->username)->first();
         $response = [];
 
-        if ($user && Hash::check($password, $user->password)) {
+        if ($user && Hash::check($request->password, $user->password)) {
             $response = [
                 'metaData' => [
                     'code' => 200,
                     'message' => 'Login Successful'
                 ],
                 'response' => [
-                    'id_user' => 1,
-                    'username' => $username,
+                    'id_user' => $user->id,
+                    'username' => $user->email,
                 ]
             ];
         } else {
@@ -66,7 +63,6 @@ class UserController extends Controller
 
         return response()->json($response);
     }
-
 
     public function register(Request $request)
     {
@@ -89,38 +85,33 @@ class UserController extends Controller
             ], 400);
         }
 
-        // Buat pengguna baru
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'user_type' => $request->user_type,
-        ]);
-
-        $response = [];
-        $STATUS_CODE = 200;
-
         try {
+            // Buat pengguna baru
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'user_type' => $request->user_type,
+            ]);
+
             $response = [
                 'metaData' => [
                     'code' => 200,
-                    'message' => 'register Successful'
+                    'message' => 'Register Successful'
                 ],
-                'response' => new \stdClass()
+                'response' => $user
             ];
-            $STATUS_CODE=200;
-        }catch (\Exception $e) {
-            $response = [
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json([
                 'metaData' => [
                     'code' => 500,
-                    'message' => $e->getMessage()
+                    'message' => 'Registration failed: ' . $e->getMessage(),
                 ],
                 'response' => new \stdClass()
-            ];
-            $STATUS_CODE=500;
+            ], 500);
         }
-
-        return response()->json($response, $STATUS_CODE);
     }
 
     public function update(Request $request, $id)
@@ -128,13 +119,13 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'user_type' => 'required|string|in:Karyawan,Magang', // Pastikan hanya menerima nilai valid
+            'user_type' => 'required|string|in:Karyawan,Magang',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Update gagal. Silakan periksa data Anda.',
+                'message' => 'Update failed. Please check your data.',
                 'errors' => $validator->errors()
             ], 422);
         }
@@ -143,7 +134,7 @@ class UserController extends Controller
         if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'User tidak ditemukan.',
+                'message' => 'User not found.',
             ], 404);
         }
 
@@ -154,20 +145,18 @@ class UserController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Data berhasil diperbarui.',
+            'message' => 'Data successfully updated.',
             'data' => $user
         ], 200);
     }
 
-
-    // Metode untuk menghapus data karyawan
     public function destroy($id)
     {
         $user = User::find($id);
         if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'User tidak ditemukan.',
+                'message' => 'User not found.',
             ], 404);
         }
 
@@ -175,8 +164,7 @@ class UserController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Data berhasil dihapus.',
+            'message' => 'Data successfully deleted.',
         ], 200);
     }
-
 }
