@@ -28,26 +28,28 @@ class AnnouncementController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'pengumuman' => 'required|string',
-            'tanggal_unggah' => 'required|date',
-        ]);
+{
+    $request->validate([
+        'pengumuman' => 'required|string',
+        'tanggal_unggah' => 'required|date',
+    ]);
 
-        $announcement = Announcement::findOrFail($id);
-        $announcement->update([
-            'pengumuman' => $request->pengumuman,
-            'tanggal_unggah' => $request->tanggal_unggah,
-        ]);
+    $announcement = Announcement::findOrFail($id);
+    $announcement->update([
+        'pengumuman' => $request->pengumuman,
+        'tanggal_unggah' => $request->tanggal_unggah,
+    ]);
+    return redirect()->route('notifications.index')->with('success', 'Announcement deleted successfully');
+    //return response()->json(['message' => 'Announcement updated successfully']);
+}
 
-        return response()->json(['message' => 'Announcement updated successfully']);
-    }
 
     public function destroy($id)
     {
         $announcement = Announcement::findOrFail($id);
         $announcement->delete();
 
-        return response()->json(['message' => 'Announcement deleted successfully']);
+        return redirect()->route('notifications.index')->with('success', 'Announcement deleted successfully');
+
     }
 }

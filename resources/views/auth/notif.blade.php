@@ -305,7 +305,7 @@
                 });
 
                 // Handle Edit form submission
-                $('#editForm').on('submit', function(event) {
+                $('#editModal').on('submit', function(event) {
                     event.preventDefault();
                     let id = $('#editId').val();
                     let url = "{{ url('notifications') }}/" + id;
