@@ -260,7 +260,7 @@
                 var selectedDate = $('#datepicker').val();
                 if (selectedDate) {
                     $.ajax({
-                        url: '{{ route('getAttendance') }}',
+                        //url: '{{ route('getAttendance') }}',s
                         type: 'GET',
                         data: {
                             date: selectedDate

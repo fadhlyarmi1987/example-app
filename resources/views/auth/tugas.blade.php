@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
-    <link rel="stylesheet" href="{{ asset('css/datamagang1.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datakaryawan.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -151,73 +151,53 @@
             color: #000000
         }
     </style>
+    
 </head>
+
 
 <body>
     <header class="header-bar">
         <div class="logo">
             <img src="{{ asset('IMG/LOGO NATUSI.png') }}" alt="logoatas" class="logo-atas">
         </div>
-        {{-- <h3> CV.NATUSI </h3>  --}}
     </header>
     <div class="main-container">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
             <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
                 <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="karyawan"></use>
-                        </svg>
                         Data Karyawan
                     </a>
                 </li>
                 <li>
                     <a href="magang" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="magang"></use>
-                        </svg>
                         Data Magang
                     </a>
                 </li>
                 <li>
                     <a href="absen" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="absen"></use>
-                        </svg>
                         List Absensi
                     </a>
                     <a href="notif" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="notif"></use>
-                        </svg>
                         Notifikasi
                     </a>
                 </li>
                 <li>
                     <a href="tugas" class="nav-link active">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="tugas"></use>
-                        </svg>
                         Tugas
                     </a>
                 </li>
-
             </ul>
             <hr>
-
             <a href="login" class="nav-link text-black">
                 <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
                     class="rounded-circle me-2">
                 <strong>Keluar</strong>
             </a>
-
         </div>
 
         <div class="main-content">
@@ -226,8 +206,7 @@
                 <form class="d-flex" role="search">
                     <input type="file" class="form-control" id="inputGroupFile04"
                         aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                    <button class="btn btn-outline-secondary btn-info " type="button"
-                        id="inputGroupFileAddon04">Button</button>
+                    <button class="btn btn-outline-secondary btn-info " type="button" id="uploadButton">Upload</button>
                 </form>
             </div>
             <div class="content">
@@ -245,25 +224,19 @@
                             </tr>
                         </thead>
                         <tbody id="fileTableBody">
-                            <!-- Contoh data, nanti bisa diganti dengan data dinamis dari server -->
-                            <tr>
-                                <td>1</td>
-                                <td>tugas1.pdf</td>
-                                <td>25 Juli 2024</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info">Unduh</button>
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>tugas2.docx</td>
-                                <td>25 Juli 2024</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info">Unduh</button>
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </td>
-                            </tr>
+                            @foreach ($files as $file)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $file->name }}</td>
+                                    <td>{{ $file->created_at }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info"
+                                            onclick="unduhFile('{{ $file->id }}')">Unduh</button>
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="hapusFile('{{ $file->id }}')">Hapus</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -290,7 +263,7 @@
                     .then(data => {
                         if (data.success) {
                             alert('File berhasil diunggah');
-                            loadFileList();
+                            location.reload();
                         } else {
                             alert('Terjadi kesalahan saat mengunggah file');
                         }
@@ -300,13 +273,13 @@
             }
         });
 
-        function unduhFile(fileName) {
-            window.location.href = '/unduh/' + fileName;
+        function unduhFile(fileId) {
+            window.location.href = '/unduh/' + fileId;
         }
 
-        function hapusFile(fileName) {
+        function hapusFile(fileId) {
             if (confirm('Apakah Anda yakin ingin menghapus file ini?')) {
-                fetch('/hapus/' + fileName, {
+                fetch('/hapus/' + fileId, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -314,40 +287,14 @@
                 }).then(response => {
                     if (response.ok) {
                         alert('File berhasil dihapus');
-                        loadFileList();
+                        location.reload();
                     } else {
                         alert('Terjadi kesalahan saat menghapus file');
                     }
                 });
             }
         }
-
-        function loadFileList() {
-            fetch('/file-list')
-                .then(response => response.json())
-                .then(data => {
-                    const tbody = document.getElementById('fileTableBody');
-                    tbody.innerHTML = '';
-
-                    data.files.forEach((file, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${index + 1}</td>
-                            <td>${file.name}</td>
-                            <td>${file.uploaded_at}</td>
-                            <td>
-                                <button class="btn btn-info btn-sm" onclick="unduhFile('${file.name}')">Unduh</button>
-                                <button class="btn btn-danger btn-sm" onclick="hapusFile('${file.name}')">Hapus</button>
-                            </td>
-                        `;
-                        tbody.appendChild(row);
-                    });
-                });
-             }
-
-            // Load file list on page load
-            loadFileList();
-        </script>
-    </body>
+    </script>
+</body>
 
 </html>

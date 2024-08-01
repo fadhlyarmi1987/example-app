@@ -4,9 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Karyawan; // Sesuaikan dengan model yang Anda gunakan
+use App\Models\User;
 
 class KaryawanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('user_type');
+    }
+
+    public function index(Request $request){
+
+        return view('auth.datakaryawan');
+
+    }
+
+    public function karyawan(Request $request) {
+
+        if($request->has('search')){
+            $data = User::where('name' ,'user_type' ,'%' .$request->search.'%')->paginate(5);
+        }else{
+            $data = User::paginate(5);
+        }
+
+        return view('auth.datakaryawan');
+    }
+
     // Metode untuk memperbarui data karyawan
     public function update(Request $request, $id)
     {
@@ -19,7 +42,7 @@ class KaryawanController extends Controller
 
         // Temukan data karyawan berdasarkan ID
         $karyawan = Karyawan::find($id);
-        
+
         if (!$karyawan) {
             return response()->json(['message' => 'Karyawan tidak ditemukan'], 404);
         }
@@ -38,7 +61,7 @@ class KaryawanController extends Controller
     {
         // Temukan data karyawan berdasarkan ID
         $karyawan = Karyawan::find($id);
-        
+
         if (!$karyawan) {
             return response()->json(['message' => 'Karyawan tidak ditemukan'], 404);
         }
@@ -49,4 +72,3 @@ class KaryawanController extends Controller
         return response()->json(['message' => 'Data karyawan berhasil dihapus'], 200);
     }
 }
-

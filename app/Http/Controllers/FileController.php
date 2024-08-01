@@ -3,56 +3,58 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    public function upload(Request $request)
+    public function index()
+    {
+        $files = File::all();
+        return view('auth.tugas', compact('files'));
+    }
+
+    public function download($id)
+    {
+        $file = File::find($id);
+
+        if (!$file) {
+            abort(404);
+        }
+
+        $filePath = storage_path('app/public/' . $file->path);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        }
+
+        abort(404);
+    }
+
+    public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|file'
+            'file' => 'required|file|mimes:pdf,doc,docx,txt'
         ]);
 
         $file = $request->file('file');
-        $filename = $file->getClientOriginalName();
-        $file->storeAs('public', $filename);
+        $filePath = $file->store('uploads');
 
-        return response()->json(['success' => 'File berhasil diunggah']);
+        File::create([
+            'name' => $file->getClientOriginalName(),
+            'path' => $filePath,
+        ]);
+
+        return response()->json(['success' => true]);
     }
 
-    public function unduh($filename)
+    public function destroy($id)
     {
-        $path = storage_path('app/public/' . $filename);
+        $file = File::findOrFail($id);
+        Storage::delete($file->path);
+        $file->delete();
 
-        if (file_exists($path)) {
-            return response()->download($path);
-        } else {
-            abort(404);
-        }
+        return response()->json(['success' => true]);
     }
 
-    public function hapus($filename)
-    {
-        $path = 'public/' . $filename;
-
-        if (Storage::exists($path)) {
-            Storage::delete($path);
-            return response()->json(['success' => 'File berhasil dihapus'], 200);
-        } else {
-            return response()->json(['error' => 'File tidak ditemukan'], 404);
-        }
-    }
-
-    public function fileList()
-    {
-        $files = Storage::files('public');
-        $fileList = array_map(function($file) {
-            return [
-                'name' => basename($file),
-                'uploaded_at' => Storage::lastModified($file)
-            ];
-        }, $files);
-
-        return response()->json(['files' => $fileList]);
-    }
 }

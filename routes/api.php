@@ -20,11 +20,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', [UserController::class, 'index']);//->name('api.users.index');
+Route::get('/users', [UserController::class, 'index'])->name('api.users.index');
+
 Route::get('users/{id}', [UserController::class, 'show']);
+
+Route::post('login', [UserController::class, 'login']);
+
+Route::post('register', [UserController::class, 'register']);
+
+Route::put('/users/{id}', [UserController::class, 'update'])->name('api.users.update');
+
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.users.destroy');
+
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
-Route::get('/listabsen', [AbsensiController::class, 'userid']);
 
-Route::post('login', [UserController::class, 'login']); 
-Route::post('register', [UserController::class, 'register']); 
-
+Route::get('/listabsenuser', [AbsensiController::class, 'userid']);

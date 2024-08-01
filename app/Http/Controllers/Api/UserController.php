@@ -122,4 +122,61 @@ class UserController extends Controller
 
         return response()->json($response, $STATUS_CODE);
     }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'user_type' => 'required|string|in:Karyawan,Magang', // Pastikan hanya menerima nilai valid
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Update gagal. Silakan periksa data Anda.',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User tidak ditemukan.',
+            ], 404);
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->user_type = $request->user_type;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diperbarui.',
+            'data' => $user
+        ], 200);
+    }
+
+
+    // Metode untuk menghapus data karyawan
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User tidak ditemukan.',
+            ], 404);
+        }
+
+        $user->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil dihapus.',
+        ], 200);
+    }
+
 }
