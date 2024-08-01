@@ -26,7 +26,7 @@ class AuthController extends Controller
     }
 
     public function Notif() {
-        return view('auth.Notifikasi');
+        return view('auth.notif');
     }
 
     public function register(Request $request)
