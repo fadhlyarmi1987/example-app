@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
@@ -22,11 +24,15 @@ Route::get('/magang', [AuthController::class, 'magang'])->name('magang');
 
 Route::get('/absen', [AuthController::class, 'absen'])->name('absen');
 
-Route::get('/notif', [AuthController::class, 'notif'])->name('notif');
+// Route::get('/notif', [AuthController::class, 'notif'])->name('notif');
+
+Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
 
 Route::get('/tugas', [AuthController::class, 'tugas'])->name('tugas');
+
 //Route::get('/getAttendance', [AuthController::class, 'getAttendance'])->name('getAttendance');
 // Di dalam routes/web.php atau routes/api.php
+
 Route::get('/getAttendance', [AuthController::class, 'getAttendance'])->name('getAttendance');
 
 Route::get('/beranda', [BerandaController::class, 'beranda']);
@@ -50,7 +56,15 @@ Route::post('/deleteKaryawan', [KaryawanController::class, 'destroy']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::post('/notif', [AnnouncementController::class, 'store'])->name('notifications.store');
+
+
+Route::put('/notif/{id}', [AnnouncementController::class, 'update'])->name('notifications.update');
+
+
 // Route method DELETE
+Route::delete('/notif/{id}', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
+
 Route::delete('/hapus/{id}', [FileController::class, 'destroy']);
 
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')->name('beranda');
