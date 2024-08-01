@@ -80,34 +80,50 @@
             <div class="header">
                 <h1>LIST DATA KARYAWAN</h1>
                 <form action="/karyawan" class="d-flex" role="search" method="GET">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Search by name or ID" aria-label="Search">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search by name or ID"
+                        aria-label="Search">
                     <button class="btn btn-info" type="submit">Search</button>
                 </form>
             </div>
-
             <div class="content">
                 <div class="card">
                     <div class="card-header">
                         <h2>Data Karyawan</h2>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-striped" id="karyawanTable">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Jabatan</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped" id="karyawanTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Jabatan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $user)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->user_type }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                        data-bs-target="#editModal" data-id="{{ $user->id }}">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#hapusModal"
+                                        data-id="{{ $user->id }}">Hapus</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $data->links() }}
             </div>
         </div>
+    </div>
+</div>
 
         <!-- Edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -154,31 +170,33 @@
                                 </select>
                             </div>
                     </div> --}}
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Hapus Modal -->
-    <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="hapusModalLabel">Hapus Data Karyawan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Anda yakin ingin menghapus data karyawan ini?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="hapusBtn">Hapus</button>
+        <!-- Hapus Modal -->
+        <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="hapusModalLabel">Hapus Data Karyawan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Anda yakin ingin menghapus data karyawan ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" id="hapusBtn">Hapus</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 
@@ -187,21 +205,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
         crossorigin="anonymous"></script>
 
-        <script>
+    <script>
         $(document).ready(function() {
-            const apiUrl = 'http://127.0.0.1:8000/api/users';
-
             function fetchData() {
                 $.ajax({
-                    url: apiUrl,
+                    url: 'http://127.0.0.1:8000//api/users?user_type=magang',
                     method: 'GET',
-                    // data: { search: all },
                     dataType: 'json',
                     success: function(data) {
                         var tableBody = $('#karyawanTable tbody');
                         tableBody.empty(); // Hapus baris tabel yang ada
 
-                        $.each(data, function(index, karyawan) {
+                        $.each(data.data, function(index, karyawan) {
                             var row = $('<tr></tr>');
                             row.append('<td>' + (index + 1) + '</td>');
                             row.append('<td>' + karyawan.name + '</td>');
@@ -210,27 +225,28 @@
                             row.append('<td>' +
                                 '<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-id="' +
                                 karyawan.id + '">Edit</button> ' +
-                                '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusModal" data-id="' +
+                                '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-id="' +
                                 karyawan.id + '">Hapus</button>' +
                                 '</td>');
 
                             tableBody.append(row);
                         });
                     },
-                    error: function() {
-                        alert('Gagal mengambil data.');
-                    }
+                    // error: function() {
+                    //     alert('Gagal mengambil data.');
+                    // }
                 });
             }
 
+            // Panggil fetchData saat halaman dimuat
             fetchData();
 
-        // Tangani event submit dari form pencarian
-        $('#searchForm').submit(function(event) {
-            event.preventDefault(); // Mencegah submit form secara tradisional
-            var query = $('#searchInput').val(); // Ambil nilai input pencarian
-            fetchData(query); // Panggil fetchData dengan parameter pencarian
-        });
+            // Tangani event submit dari form pencarian
+            $('#searchForm').submit(function(event) {
+                event.preventDefault(); // Mencegah submit form secara tradisional
+                var query = $('#searchInput').val(); // Ambil nilai input pencarian
+                fetchData(query); // Panggil fetchData dengan parameter pencarian
+            });
 
             // Panggil fetchData saat halaman dimuat
             fetchData();
@@ -241,10 +257,10 @@
                 var modal = $(this);
 
                 $('form[role="search"]').submit(function(event) {
-        event.preventDefault();
-        var query = $(this).find('input[name="search"]').val();
-        fetchData(query);
-    });
+                    event.preventDefault();
+                    var query = $(this).find('input[name="search"]').val();
+                    fetchData(query);
+                });
 
                 $.ajax({
                     url: apiUrl + '/' + id,

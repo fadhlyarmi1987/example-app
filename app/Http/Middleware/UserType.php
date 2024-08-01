@@ -34,3 +34,16 @@ class UserType
         }
     }
 }
+
+class CheckUserType
+{
+    public function handle($request, Closure $next)
+    {
+        if (Auth::check() && Auth::user()->user_type == 'Karyawan') {
+            return $next($request);
+        }
+
+        return redirect('/login'); // atau halaman lain yang sesuai
+    }
+}
+

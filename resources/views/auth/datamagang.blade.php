@@ -186,32 +186,32 @@
         $(document).ready(function() {
             function fetchData() {
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users',
+                    url: 'http://127.0.0.1:8000//api/users?user_type=magang',
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
                         var tableBody = $('#karyawanTable tbody');
                         tableBody.empty(); // Hapus baris tabel yang ada
-                        $.each(data, function(index, karyawan) {
-                            if (karyawan.user_type === 'magang') {
-                                var row = $('<tr></tr>');
-                                row.append('<td>' + (index + 1) + '</td>');
-                                row.append('<td>' + karyawan.name + '</td>');
-                                row.append('<td>' + karyawan.email + '</td>');
-                                row.append('<td>' + karyawan.user_type + '</td>');
-                                row.append('<td>' +
-                                    '<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-id="' +
-                                    karyawan.id + '">Edit</button> ' +
-                                    '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusModal" data-id="' +
-                                    karyawan.id + '">Hapus</button>' +
-                                    '</td>');
-                                tableBody.append(row);
-                            }
+
+                        $.each(data.data, function(index, karyawan) {
+                            var row = $('<tr></tr>');
+                            row.append('<td>' + (index + 1) + '</td>');
+                            row.append('<td>' + karyawan.name + '</td>');
+                            row.append('<td>' + karyawan.email + '</td>');
+                            row.append('<td>' + karyawan.user_type + '</td>');
+                            row.append('<td>' +
+                                '<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-id="' +
+                                karyawan.id + '">Edit</button> ' +
+                                '<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-id="' +
+                                karyawan.id + '">Hapus</button>' +
+                                '</td>');
+
+                            tableBody.append(row);
                         });
                     },
-                    error: function() {
-                        alert('Gagal mengambil data.');
-                    }
+                    // error: function() {
+                    //     alert('Gagal mengambil data.');
+                    // }
                 });
             }
 
