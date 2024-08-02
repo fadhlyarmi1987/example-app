@@ -292,6 +292,8 @@
 
         function unduhFile(fileId) {
             window.location.href = '/unduh/' + fileId;
+            console.log(downloadUrl);
+            window.location.href = downloadUrl;
         }
 
         function hapusFile(fileId) {
