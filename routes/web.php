@@ -67,6 +67,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route method DELETE
 //Route::delete('/notif', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
+Route::get('/unduh/{id}', [FileController::class, 'download'])->name('file.download');
 Route::delete('/hapus/{id}', [FileController::class, 'destroy']);
 //Route::delete('/notifications/{id}', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
 

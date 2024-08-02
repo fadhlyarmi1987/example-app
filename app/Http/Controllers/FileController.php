@@ -16,19 +16,24 @@ class FileController extends Controller
 
     public function download($id)
     {
+        // Cari file berdasarkan ID
         $file = File::find($id);
-
+        
+        // Jika file tidak ditemukan, kembalikan respons error
         if (!$file) {
-            abort(404);
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
         }
-
-        $filePath = storage_path('app/public/' . $file->path);
-
-        if (file_exists($filePath)) {
-            return response()->download($filePath);
+    
+        // Dapatkan path file dari penyimpanan
+        $path = storage_path('app/' . $file->path); // Sesuaikan dengan cara Anda menyimpan file
+        
+        // Periksa apakah file benar-benar ada di path tersebut
+        if (!file_exists($path)) {
+            return redirect()->back()->with('error', 'File tidak ditemukan di server.');
         }
-
-        abort(404);
+    
+        // Kembalikan response untuk mengunduh file
+        return response()->download($path, $file->name);
     }
 
     public function store(Request $request)
@@ -56,5 +61,7 @@ class FileController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    
 
 }
