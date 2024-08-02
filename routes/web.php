@@ -25,6 +25,7 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 // Route::get('/magang', [AuthController::class, 'magang'])->name('magang');
 
 Route::get('/absen', [AuthController::class, 'absen'])->name('absen');
+
 //Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
 
 Route::get('/tugas', [AuthController::class, 'tugas'])->name('tugas');
@@ -40,6 +41,7 @@ Route::get('/tugas', [FileController::class, 'index']);
 Route::get('/unduh/{id}', [FileController::class, 'download']);
 
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')->name('beranda');
+
 //Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
 
 //method POST
