@@ -45,6 +45,7 @@ Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')-
 //Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
 
 //method POST
+
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit'); // Menambahkan route post untuk register
