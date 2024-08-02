@@ -16,7 +16,7 @@
 
         .sidebar {
             width: 280px;
-            
+
         }
 
         .content-container {
@@ -181,9 +181,9 @@
                         List Absensi
                     </a>
                 </li>
-                <a href="notif" class="nav-link active">
+                <a href="notifications" class="nav-link active">
                     <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="notif"></use>
+                        <use xlink:href="notifications"></use>
                     </svg>
                     Notifikasi
                 </a>
@@ -279,7 +279,7 @@
                                 <label for="editText">Pengumuman</label>
                                 <textarea class="form-control" id="editText" name="pengumuman" rows="3"></textarea>
                             </div>
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

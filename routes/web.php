@@ -63,11 +63,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 //Route::post('/notif', [AnnouncementController::class, 'store'])->name('notifications.store');
 
 //method PUT
+
 //Route::put('/notif/{id}', [AnnouncementController::class, 'update'])->name('notifications.update');
 
 // Route method DELETE
+
 //Route::delete('/notif', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
+
 Route::delete('/hapus/{id}', [FileController::class, 'destroy']);
+
 //Route::delete('/notifications/{id}', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
 
 // Rute yang dilindungi oleh middleware auth
