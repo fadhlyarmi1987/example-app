@@ -181,9 +181,9 @@
                         List Absensi
                     </a>
                 </li>
-                <a href="notif" class="nav-link active">
+                <a href="notifications" class="nav-link active">
                     <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="notif"></use>
+                        <use xlink:href="notifications"></use>
                     </svg>
                     Notifikasi
                 </a>
