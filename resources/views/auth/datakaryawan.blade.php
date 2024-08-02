@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/datakaryawan.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
 </head>
@@ -187,8 +188,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
-        crossorigin="anonymous">
-    </script>
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -266,7 +267,10 @@
                     success: function() {
                         $('#editModal').modal('hide');
                         fetchData();
-                        location.reload();
+                        toastr.success('Data berhasil diperbarui');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000); // Tunggu 2 detik sebelum reload halaman
                     },
                     error: function() {
                         alert('Gagal memperbarui data.');
@@ -288,7 +292,10 @@
                     success: function() {
                         $('#hapusModal').modal('hide');
                         fetchData();
-                        location.reload();
+                        toastr.success('Data berhasil dihapus');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
                     },
                     error: function() {
                         alert('Gagal menghapus data.');

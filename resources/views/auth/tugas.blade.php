@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
     <link rel="stylesheet" href="{{ asset('css/datakaryawan.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
         .main-container {
@@ -160,7 +162,6 @@
             width: 110px;
             height: 45px;
         }
-
     </style>
 
 </head>
@@ -217,7 +218,7 @@
                 <h1>UPLOADING TUGAS</h1>
                 <form class="d-flex" role="search">
                     <button class="btn btn-outline-secondary btn-custom" type="button" data-bs-toggle="modal"
-                        data-bs-target="#uploadModal" >Upload</button>
+                        data-bs-target="#uploadModal">Upload</button>
                 </form>
             </div>
             <div class="content">
@@ -297,6 +298,7 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         document.getElementById('modalUploadButton').addEventListener('click', function() {
@@ -316,14 +318,18 @@
                     }).then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            location.reload();
+                            toastr.success('Data berhasil diunggah');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000); // Tunggu 2 detik sebelum reload halaman
                         } else {
-                            alert('Terjadi kesalahan saat mengunggah file');
+                            toastr.error('Terjadi kesalahan saat mengunggah file');
                         }
                     });
             } else {
-                alert('Pilih file terlebih dahulu.');
+                toastr.error('Pilih file terlebih dulu');
             }
+
         });
 
         function unduhFile(fileId) {
@@ -339,17 +345,25 @@
         document.getElementById('confirmDelete').addEventListener('click', function() {
             if (fileIdToDelete) {
                 fetch('/hapus/' + fileIdToDelete, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        alert('Terjadi kesalahan saat menghapus file');
-                    }
-                });
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }).then(response => response.json()) // Pastikan untuk mengkonversi respons ke JSON
+                    .then(data => {
+                        if (data.success) {
+                            toastr.success('Data berhasil dihapus', {
+                                timeOut: 3000, // Menampilkan toastr selama 3 detik
+                            });
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000); // Mengatur delay reload agar sesuai dengan waktu toastr
+                        } else {
+                            toastr.error('Terjadi kesalahan saat menghapus file');
+                        }
+                    }).catch(error => {
+                        toastr.error('Terjadi kesalahan pada server');
+                    });
             }
         });
     </script>
