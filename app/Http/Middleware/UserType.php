@@ -24,7 +24,7 @@ class UserType
             return redirect('/login');
         }
 
-        if ($user->user_type == 'Karyawan') {
+        if ($user->user_type == 'Admin') {
             // Jika jenis pengguna adalah Karyawan, izinkan melanjutkan request
             return $next($request);
             // return redirect('/karyawan');

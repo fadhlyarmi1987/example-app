@@ -16,7 +16,7 @@
 
         .sidebar {
             width: 280px;
-            
+
         }
 
         .content-container {
@@ -279,7 +279,7 @@
                                 <label for="editText">Pengumuman</label>
                                 <textarea class="form-control" id="editText" name="pengumuman" rows="3"></textarea>
                             </div>
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

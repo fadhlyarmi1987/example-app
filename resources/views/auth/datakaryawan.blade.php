@@ -266,6 +266,7 @@
                     success: function() {
                         $('#editModal').modal('hide');
                         fetchData();
+                        location.reload();
                     },
                     error: function() {
                         alert('Gagal memperbarui data.');
@@ -287,6 +288,7 @@
                     success: function() {
                         $('#hapusModal').modal('hide');
                         fetchData();
+                        location.reload();
                     },
                     error: function() {
                         alert('Gagal menghapus data.');

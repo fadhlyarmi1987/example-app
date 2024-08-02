@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('user_type');
+    }
+
     public function index()
     {
         $files = File::all();
@@ -18,20 +23,20 @@ class FileController extends Controller
     {
         // Cari file berdasarkan ID
         $file = File::find($id);
-        
+
         // Jika file tidak ditemukan, kembalikan respons error
         if (!$file) {
             return redirect()->back()->with('error', 'File tidak ditemukan.');
         }
-    
+
         // Dapatkan path file dari penyimpanan
         $path = storage_path('app/' . $file->path); // Sesuaikan dengan cara Anda menyimpan file
-        
+
         // Periksa apakah file benar-benar ada di path tersebut
         if (!file_exists($path)) {
             return redirect()->back()->with('error', 'File tidak ditemukan di server.');
         }
-    
+
         // Kembalikan response untuk mengunduh file
         return response()->download($path, $file->name);
     }
@@ -62,6 +67,6 @@ class FileController extends Controller
         return response()->json(['success' => true]);
     }
 
-    
+
 
 }
