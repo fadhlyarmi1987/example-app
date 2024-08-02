@@ -187,10 +187,14 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 
     <script>
         $(document).ready(function() {
+
+            var baseUrl = 'http://127.0.0.1:8000/api/users';
+
             function fetchData() {
                 $.ajax({
                     url: 'http://127.0.0.1:8000//api/users?user_type=karyawan',
@@ -230,7 +234,7 @@
                 var id = button.data('id');
                 var modal = $(this);
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users/' + id,
+                    url: baseUrl + '/' + id,
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -252,7 +256,7 @@
                 var email = $('#editEmail').val();
                 var jabatan = $('#editJabatan').val();
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users/' + id,
+                    url: baseUrl + '/' + id,
                     method: 'PUT',
                     data: {
                         name: nama,
@@ -278,7 +282,7 @@
             $('#hapusBtn').click(function() {
                 var id = $(this).data('id');
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/users/' + id,
+                    url: baseUrl + '/' + id,
                     method: 'DELETE',
                     success: function() {
                         $('#hapusModal').modal('hide');
@@ -294,4 +298,3 @@
 </body>
 
 </html>
-
