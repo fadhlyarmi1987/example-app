@@ -22,11 +22,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
-// Route::get('/magang', [AuthController::class, 'magang'])->name('magang');
-
 Route::get('/absen', [AuthController::class, 'absen'])->name('absen');
-
-//Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
 
 Route::get('/tugas', [AuthController::class, 'tugas'])->name('tugas');
 
@@ -42,7 +38,9 @@ Route::get('/unduh/{id}', [FileController::class, 'download']);
 
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')->name('beranda');
 
-//Route::get('/notif', [AnnouncementController::class, 'index'])->name('notifications.index');
+Route::get('/unduh/{id}', [FileController::class, 'download'])->name('file.download');
+
+
 
 //method POST
 
@@ -61,20 +59,13 @@ Route::post('/deleteMagang', [MagangController::class, 'destroy']);
 Route::post('/updateMagang', [MagangController::class, 'update']);
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-//Route::post('/notif', [AnnouncementController::class, 'store'])->name('notifications.store');
 
-//method PUT
-
-//Route::put('/notif/{id}', [AnnouncementController::class, 'update'])->name('notifications.update');
 
 // Route method DELETE
 
-//Route::delete('/notif', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
-Route::get('/unduh/{id}', [FileController::class, 'download'])->name('file.download');
-
 Route::delete('/hapus/{id}', [FileController::class, 'destroy']);
 
-//Route::delete('/notifications/{id}', [AnnouncementController::class, 'destroy'])->name('notifications.destroy');
+
 
 // Rute yang dilindungi oleh middleware auth
 
