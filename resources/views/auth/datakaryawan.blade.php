@@ -267,13 +267,10 @@
                     success: function() {
                         $('#editModal').modal('hide');
                         fetchData();
-<<<<<<< HEAD
-=======
                         toastr.success('Data berhasil diperbarui');
                         setTimeout(function() {
                             location.reload();
                         }, 1000); // Tunggu 2 detik sebelum reload halaman
->>>>>>> cd4a054996520421315b6317bc2f4d731f55c150
                     },
                     error: function() {
                         alert('Gagal memperbarui data.');
@@ -295,13 +292,10 @@
                     success: function() {
                         $('#hapusModal').modal('hide');
                         fetchData();
-<<<<<<< HEAD
-=======
                         toastr.success('Data berhasil dihapus');
                         setTimeout(function() {
                             location.reload();
                         }, 1000);
->>>>>>> cd4a054996520421315b6317bc2f4d731f55c150
                     },
                     error: function() {
                         alert('Gagal menghapus data.');
