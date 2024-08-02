@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
     <link rel="stylesheet" href="{{ asset('css/datakaryawan.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .main-container {
@@ -107,6 +106,7 @@
         .btn-info {
             background-color: #28a745;
             color: #fff;
+            margin-left: 30px;
         }
 
         .btn-danger {
@@ -124,7 +124,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         /* .header h3 {
@@ -150,10 +150,20 @@
             margin: 0;
             color: #000000
         }
+
+        .btn-custom {
+            background-color: #28a745;
+            font-family: 'Calibri', Times, serif;
+            color: #fff;
+            border-radius: 10px;
+            margin-right: 30px;
+            width: 110px;
+            height: 45px;
+        }
+
     </style>
 
 </head>
-
 
 <body>
     <header class="header-bar">
@@ -169,45 +179,30 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="karyawan"></use>
-                        </svg>
+                    <a href="karyawan" class="nav-link text-black" aria-current="page">
                         Data Karyawan
                     </a>
                 </li>
                 <li>
                     <a href="magang" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="magang"></use>
-                        </svg>
                         Data Magang
                     </a>
                 </li>
                 <li>
                     <a href="absen" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="absen"></use>
-                        </svg>
                         List Absensi
                     </a>
                 </li>
-                <a href="notifications" class="nav-link text-black">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="notifications"></use>
-                    </svg>
-                    Notifikasi
-                </a>
+                <li>
+                    <a href="notifications" class="nav-link text-black">
+                        Notifikasi
+                    </a>
                 </li>
                 <li>
                     <a href="tugas" class="nav-link active">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="tugas"></use>
-                        </svg>
                         Tugas
                     </a>
                 </li>
-
             </ul>
             <hr>
             <a href="login" class="nav-link text-black">
@@ -221,9 +216,8 @@
             <div class="header">
                 <h1>UPLOADING TUGAS</h1>
                 <form class="d-flex" role="search">
-                    <input type="file" class="form-control" id="inputGroupFile04"
-                        aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                    <button class="btn btn-outline-secondary btn-info " type="button" id="uploadButton">Upload</button>
+                    <button class="btn btn-outline-secondary btn-custom" type="button" data-bs-toggle="modal"
+                        data-bs-target="#uploadModal" >Upload</button>
                 </form>
             </div>
             <div class="content">
@@ -249,7 +243,8 @@
                                     <td>
                                         <button class="btn btn-sm btn-info"
                                             onclick="unduhFile('{{ $file->id }}')">Unduh</button>
-                                        <button class="btn btn-sm btn-danger"
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"
                                             onclick="hapusFile('{{ $file->id }}')">Hapus</button>
                                     </td>
                                 </tr>
@@ -261,9 +256,51 @@
         </div>
     </div>
 
+    <!-- Modal Upload -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadForm">
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="modalFileInput" aria-label="Upload">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="modalUploadButton">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Hapus -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Hapus File</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus file ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        document.getElementById('uploadButton').addEventListener('click', function() {
-            const fileInput = document.getElementById('inputGroupFile04');
+        document.getElementById('modalUploadButton').addEventListener('click', function() {
+            const fileInput = document.getElementById('modalFileInput');
             const file = fileInput.files[0];
 
             if (file) {
@@ -279,7 +316,6 @@
                     }).then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('File berhasil diunggah');
                             location.reload();
                         } else {
                             alert('Terjadi kesalahan saat mengunggah file');
@@ -292,28 +328,32 @@
 
         function unduhFile(fileId) {
             window.location.href = '/unduh/' + fileId;
-            console.log(downloadUrl);
-            window.location.href = downloadUrl;
         }
 
+        let fileIdToDelete;
+
         function hapusFile(fileId) {
-            if (confirm('Apakah Anda yakin ingin menghapus file ini?')) {
-                fetch('/hapus/' + fileId, {
+            fileIdToDelete = fileId;
+        }
+
+        document.getElementById('confirmDelete').addEventListener('click', function() {
+            if (fileIdToDelete) {
+                fetch('/hapus/' + fileIdToDelete, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     }
                 }).then(response => {
                     if (response.ok) {
-                        alert('File berhasil dihapus');
                         location.reload();
                     } else {
                         alert('Terjadi kesalahan saat menghapus file');
                     }
                 });
             }
-        }
+        });
     </script>
+
 </body>
 
 </html>

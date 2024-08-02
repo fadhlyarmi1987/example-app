@@ -187,7 +187,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -265,6 +266,7 @@
                     success: function() {
                         $('#editModal').modal('hide');
                         fetchData();
+                        location.reload();
                     },
                     error: function() {
                         alert('Gagal memperbarui data.');
@@ -286,6 +288,7 @@
                     success: function() {
                         $('#hapusModal').modal('hide');
                         fetchData();
+                        location.reload();
                     },
                     error: function() {
                         alert('Gagal menghapus data.');
