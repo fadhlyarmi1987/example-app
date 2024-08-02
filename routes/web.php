@@ -32,8 +32,6 @@ Route::get('/beranda', [BerandaController::class, 'beranda']);
 
 Route::get('/penjumlahan', [BerandaController::class, 'penjumlahan']);
 
-Route::get('/tugas', [FileController::class, 'index']);
-
 Route::get('/unduh/{id}', [FileController::class, 'download']);
 
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')->name('beranda');
@@ -74,6 +72,10 @@ Route::middleware(['user_type'])->group(function () {
     Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
 
     Route::get('/magang', [MagangController::class, 'magang'])->name('magang');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notif');
+
+    Route::get('/tugas', [FileController::class, 'index'])->name('tugas');
     // Tambahkan semua rute lain yang ingin dilindungi disini
 });
 

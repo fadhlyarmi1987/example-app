@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('user_type');
+    }
+
     public function index()
     {
         $notifications = Notification::all();
