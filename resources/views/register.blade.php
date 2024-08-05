@@ -11,12 +11,6 @@
         <div class="logo">
             <img src="{{ asset('IMG/LOGO NATUSI.png') }}" alt="logoatas" class="logo-atas">
         </div>
-        <nav class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-        </nav>
     </header>
     <div class="header">
         <div class="container-combine">
@@ -28,7 +22,7 @@
                     <h2>
                         <img src="{{ asset('IMG/LOGO.png') }}" width="250" height="100">
                     </h2>
-                    
+
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
