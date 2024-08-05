@@ -19,6 +19,7 @@ class ListAbsenController extends Controller
         $request->validate([
             'userid' => 'required|string|max:255',
             'typetime' => 'required|string|max:255',
+            'role'=>'required|string|max:255',
             'time' => 'required|date_format:Y-m-d H:i:s',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
@@ -33,6 +34,7 @@ class ListAbsenController extends Controller
         $listAbsen->latitude = $request->input('latitude');
         $listAbsen->longitude = $request->input('longitude');
         $listAbsen->kantorid = $request->input('kantorid');
+        $listAbsen->role = $request->input('role');
         $listAbsen->save();
 
         // Response
@@ -44,10 +46,10 @@ class ListAbsenController extends Controller
 
     public function show(Request $request)
     {
-        $userid = $request->query('userid');
+        $date = $request->query('date');
 
-        if ($userid) {
-            $absen = ListAbsen::where('userid', $userid)->get();
+        if ($date) {
+            $absen = ListAbsen::whereDate('time', $date)->get();
             if ($absen->isEmpty()) {
                 return response()->json(['message' => 'Data tidak ditemukan'], 404);
             }
