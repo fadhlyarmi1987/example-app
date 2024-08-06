@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AbsensiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\ListAbsenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('api.users.up
 
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.users.destroy');
 
-Route::get('listabsen', [AbsensiController::class, 'listabsen']);
+Route::get('listabsen', [ListAbsenController::class, 'show']);
 
-Route::get('/listabsenuser', [AbsensiController::class, 'userid']);
+Route::post('absen', [ListAbsenController::class, 'store']);
 //test

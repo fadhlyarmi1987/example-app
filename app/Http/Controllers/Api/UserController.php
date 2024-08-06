@@ -49,6 +49,7 @@ class UserController extends Controller
                 'response' => [
                     'id_user' => $user->id,
                     'username' => $user->email,
+                    'name' => $user->name,
                 ]
             ];
         } else {
