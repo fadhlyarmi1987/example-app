@@ -15,7 +15,7 @@ class CreateListabsenTable extends Migration
     {
         Schema::create('listabsen', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userid');
+            $table->string('userid');
             $table->string('typetime', 50);
             $table->timestamp('time');
             $table->decimal('longitude', 10, 7);

@@ -15,6 +15,7 @@ class Listabsen extends Model
         'userid',
         'typetime',
         'time',
+        'role',
         'longitude',
         'latitude',
         'kantorid',

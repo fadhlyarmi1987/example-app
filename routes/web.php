@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\ListAbsenController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\NotificationController;
 
@@ -26,7 +27,7 @@ Route::get('/absen', [AuthController::class, 'absen'])->name('absen');
 
 Route::get('/tugas', [AuthController::class, 'tugas'])->name('tugas');
 
-Route::get('/getAttendance', [AuthController::class, 'getAttendance'])->name('getAttendance');
+Route::get('/getAttendance', [ListAbsenController::class, 'show'])->name('getAttendance');
 
 Route::get('/beranda', [BerandaController::class, 'beranda']);
 
