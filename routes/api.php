@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// API USERS
+
 Route::get('/users', [UserController::class, 'index'])->name('api.users.index');
 
 Route::get('users/{id}', [UserController::class, 'show']);
@@ -35,9 +37,13 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('api.users.up
 
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.users.destroy');
 
+// API LISTABSEN
+
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
 
 Route::get('/listabsenuser', [AbsensiController::class, 'userid']);
+
+// API TUGAS
 
 Route::get('/files', [TugasController::class, 'apiIndex']);
 
@@ -47,10 +53,13 @@ Route::get('/files/{id}', [TugasController::class, 'apiDownload']);
 
 Route::delete('/files/{id}', [TugasController::class, 'apiDestroy']);
 
-Route::get('notifications', [NotifController::class, 'index']);
 
-Route::post('notifications', [NotifController::class, 'store']);
+// API NOTIF
 
-Route::put('notifications/{id}', [NotifController::class, 'update']);
+Route::get('/notifications', [NotifController::class, 'apiIndex']);
 
-Route::delete('notifications/{id}', [NotifController::class, 'destroy']);
+Route::post('/notifications', [NotifController::class, 'apiStore']);
+
+Route::put('/notifications/{id}', [NotifController::class, 'apiUpdate']);
+
+Route::delete('/notifications/{id}', [NotifController::class, 'apiDestroy']);
