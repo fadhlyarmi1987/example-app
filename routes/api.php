@@ -47,9 +47,10 @@ Route::get('/files/{id}', [TugasController::class, 'apiDownload']);
 
 Route::delete('/files/{id}', [TugasController::class, 'apiDestroy']);
 
-
-
 Route::get('notifications', [NotifController::class, 'index']);
+
 Route::post('notifications', [NotifController::class, 'store']);
+
 Route::put('notifications/{id}', [NotifController::class, 'update']);
+
 Route::delete('notifications/{id}', [NotifController::class, 'destroy']);
