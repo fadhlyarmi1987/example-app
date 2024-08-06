@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AbsensiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TugasController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +37,12 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.user
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
 
 Route::get('/listabsenuser', [AbsensiController::class, 'userid']);
-//test
+
+Route::get('/files', [TugasController::class, 'apiIndex']);
+
+Route::post('/files', [TugasController::class, 'apiStore']);
+
+Route::get('/files/{id}', [TugasController::class, 'apiDownload']);
+
+Route::delete('/files/{id}', [TugasController::class, 'apiDestroy']);
+
