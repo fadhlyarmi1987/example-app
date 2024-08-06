@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AbsensiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\NotifController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,8 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.user
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
 
 Route::get('/listabsenuser', [AbsensiController::class, 'userid']);
-//test
+
+Route::get('notifications', [NotifController::class, 'index']);
+Route::post('notifications', [NotifController::class, 'store']);
+Route::put('notifications/{id}', [NotifController::class, 'update']);
+Route::delete('notifications/{id}', [NotifController::class, 'destroy']);
