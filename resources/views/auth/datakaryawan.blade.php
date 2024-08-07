@@ -188,12 +188,12 @@
     <script>
         $(document).ready(function() {
 
-            var baseUrl = 'http://127.0.0.1:8000//api/users';
+            var baseUrl = 'http://127.0.0.1:8000/api/users';
 
             function fetchData() {
 
                 $.ajax({
-                    url: 'http://127.0.0.1:8000//api/users?user_type=magang',
+                    url: 'http://127.0.0.1:8000//api/users?user_type=karyawan',
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -240,7 +240,7 @@
                         modal.find('#editId').val(data.id);
                     },
                     error: function() {
-                        alert('Gagal mengambil data karyawan.');
+                        toastr.error('Gagal mengambil data');
                     }
                 });
             });
