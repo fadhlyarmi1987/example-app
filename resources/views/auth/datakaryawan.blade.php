@@ -9,8 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-
 </head>
 
 <body>
@@ -18,7 +16,6 @@
         <div class="logo">
             <img src="{{ asset('IMG/LOGO NATUSI.png') }}" alt="logoatas" class="logo-atas">
         </div>
-        {{-- <h3> CV.NATUSI </h3>  --}}
     </header>
     <div class="main-container">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
@@ -50,12 +47,13 @@
                         </svg>
                         List Absensi
                     </a>
-                    <a href="notifications" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="notifications"></use>
-                        </svg>
-                        Notifikasi
-                    </a>
+                </li>
+                <a href="notifications" class="nav-link text-black">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="notifications"></use>
+                    </svg>
+                    Notifikasi
+                </a>
                 </li>
                 <li>
                     <a href="tugas" class="nav-link text-black">
@@ -65,23 +63,20 @@
                         Tugas
                     </a>
                 </li>
-
             </ul>
             <hr>
-
             <a href="login" class="nav-link text-black">
                 <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
                     class="rounded-circle me-2">
                 <strong>Keluar</strong>
             </a>
-
         </div>
 
         <div class="main-content">
             <div class="header">
                 <h1>LIST DATA KARYAWAN</h1>
                 <form action="/karyawan" class="d-flex" role="search" method="GET">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Search by name or ID"
+                    <input class="form-control me-2" type="search" name='search' placeholder="Search by name or ID"
                         aria-label="Search">
                     <button class="btn btn-info" type="submit">Search</button>
                 </form>
@@ -184,12 +179,11 @@
         </div>
     </div>
 
-
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..."
-        crossorigin="anonymous">
-    </script>
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -197,8 +191,9 @@
             var baseUrl = 'http://127.0.0.1:8000/api/users';
 
             function fetchData() {
+
                 $.ajax({
-                    url: 'http://127.0.0.1:8000//api/users?user_type=karyawan',
+                    url: 'http://127.0.0.1:8000//api/users?user_type=magang',
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -273,7 +268,7 @@
                         }, 1000); // Tunggu 2 detik sebelum reload halaman
                     },
                     error: function() {
-                        alert('Gagal memperbarui data.');
+                        toastr.error('Gagal memperbarui data');
                     }
                 });
             });
@@ -298,7 +293,7 @@
                         }, 1000);
                     },
                     error: function() {
-                        alert('Gagal menghapus data.');
+                        toastr.error('Gagal menghapus data');;
                     }
                 });
             });

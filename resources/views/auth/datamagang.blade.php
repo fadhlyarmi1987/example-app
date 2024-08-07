@@ -240,7 +240,7 @@
                         modal.find('#editId').val(data.id);
                     },
                     error: function() {
-                        alert('Gagal mengambil data karyawan.');
+                        alert('Gagal mengambil data magang.');
                     }
                 });
             });

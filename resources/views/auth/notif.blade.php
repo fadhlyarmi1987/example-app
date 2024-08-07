@@ -334,7 +334,12 @@
                 pengumuman: $('#pengumuman').val(),
             },
             success: function(response) {
-                // Handle success (e.g., refresh the notifications list)
+                // Reload the page to reflect the new notification
+                location.reload();
+            },
+            error: function(xhr) {
+                // Handle error (optional)
+                console.log(xhr.responseText);
             }
         });
     });
@@ -344,7 +349,9 @@
         var id = $(this).data('id');
         var pengumuman = $(this).data('pengumuman');
 
-        $('#editForm').on('submit', function(e) {
+        $('#editText').val(pengumuman);
+
+        $('#editForm').off('submit').on('submit', function(e) {
             e.preventDefault();
 
             $.ajax({
@@ -354,7 +361,12 @@
                     pengumuman: $('#editText').val(),
                 },
                 success: function(response) {
-                    // Handle success (e.g., update the notification in the list)
+                    // Reload the page to reflect the updated notification
+                    location.reload();
+                },
+                error: function(xhr) {
+                    // Handle error (optional)
+                    console.log(xhr.responseText);
                 }
             });
         });
@@ -373,7 +385,12 @@
                 url: '/api/notifications/' + id,
                 type: 'DELETE',
                 success: function(response) {
-                    // Handle success (e.g., remove the notification from the list)
+                    // Reload the page to reflect the deletion
+                    location.reload();
+                },
+                error: function(xhr) {
+                    // Handle error (optional)
+                    console.log(xhr.responseText);
                 }
             });
         });
