@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Listabsen;
+use App\Models\ListAbsen;
 
 class AbsensiController extends Controller
 {
     public function listabsen()
     {
-        $listabsen = Listabsen::all();
+        $listabsen = ListAbsen::all();
         return response()->json($listabsen);
     }
 
@@ -18,7 +18,7 @@ class AbsensiController extends Controller
 {
     $userid = $request->query('userid');
 
-    $listabsen = Listabsen::where('userid', $userid)->get();
+    $listabsen = ListAbsen::where('userid', $userid)->get();
     return response()->json($listabsen);
 }
 
