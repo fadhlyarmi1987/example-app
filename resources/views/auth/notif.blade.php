@@ -348,7 +348,7 @@
                     $('#deleteId').val(id);
                     $('#deleteModal').modal('show');
                 });
-                
+
             });
         </script>
 
