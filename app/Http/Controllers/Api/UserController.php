@@ -22,7 +22,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-    
+
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
@@ -36,7 +36,7 @@ class UserController extends Controller
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
-    
+
         $user = User::where('email', $request->username)->first();
         $response = [];
 

@@ -228,14 +228,15 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
                                     <th>Jabatan</th>
-                                    <th>Tanggal</th>
+                                    <th>Keterangan</th>
+                                    <th>Tanggal Dan Waktu</th>
+                                    <th>Lokasi</th>
                                 </tr>
                             </thead>
                             <tbody id="attendanceTable">
                                 <tr>
-                                    <td colspan="5">Silakan pilih tanggal untuk melihat data presensi.</td>
+                                    <td colspan="7">Silakan pilih tanggal untuk melihat data presensi.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -257,7 +258,7 @@
                 var selectedDate = $('#datepicker').val();
                 if (selectedDate) {
                     $.ajax({
-                        //url: '{{ route('getAttendance') }}',s
+                        url: '{{ route('getAttendance') }}',
                         type: 'GET',
                         data: {
                             date: selectedDate
@@ -269,15 +270,16 @@
                                 $.each(data, function(index, attendance) {
                                     attendanceTable.append('<tr><td>' + (index + 1) +
                                         '</td><td>' + attendance.name +
-                                        '</td><td>' + attendance.email +
-                                        '</td><td>' + attendance.role +
-                                        '</td><td>' + attendance.date + '</td></tr>'
-                                        );
+                                        '</td><td>' + attendance.user_type +
+                                        '</td><td>' + attendance.typetime +
+                                        '</td><td>' + attendance.time +
+                                        '</td><td>' + attendance.kantorid +
+                                        '</td></tr>');
                                 });
                             } else {
                                 attendanceTable.append(
-                                    '<tr><td colspan="5">Tidak ada data presensi untuk tanggal ini.</td></tr>'
-                                    );
+                                    '<tr><td colspan="7">Tidak ada data presensi untuk tanggal ini.</td></tr>'
+                                );
                             }
                         },
                         error: function(xhr, status, error) {
@@ -289,4 +291,5 @@
         });
     </script>
 </body>
+
 </html>

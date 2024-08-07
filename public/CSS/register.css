@@ -1,11 +1,16 @@
+/* Existing styles (remain unchanged for desktop) */
 body {
     font-family: sans-serif;
-    margin: 0%;
     background-image: linear-gradient(to right, #5292C1, #27455B);
-  }
+    margin: 0;
+    padding: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
 
-  .header-bar {
-    background: linear-gradient(to bottom, #5292C1, #27455B); /* Perbaiki warna latar belakang */
+.header-bar {
+    background: linear-gradient(to bottom, #5292C1, #27455B);
     color: white;
     display: flex;
     justify-content: space-between;
@@ -14,8 +19,8 @@ body {
 }
 
 .header-bar .logo-atas {
-    max-width: 30px; /* Atur ukuran maksimum gambar logo */
-    height: auto; /* Pertahankan rasio aspek gambar */
+    max-width: 30px;
+    height: auto;
 }
 
 .header-bar .nav-links a {
@@ -30,51 +35,55 @@ body {
 }
 
 .container {
-    width: 500px;
-    margin-left: 0px auto;
-    margin-right: 20px;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: linear-gradient(to right, #5292C1, #27455B);
-    /* background-image: linear-gradient(to right, #5292C1, #27455B); */
-
-    }
-
-.container-imgbanner img {
-        width: 1170px; /* Mengatur lebar gambar agar 100% dari lebar container */
-        height: 100%; /* Mempertahankan rasio aspek gambar */
-    }
-
-.container-img {
-        align-items: center;
-        border-color: linear-gradient(to right, #5292C1, #27455B);
-        padding: 20px;
-        height: 95px;
-    }
-
-.container-combine {
-        display: flex;
-        margin-left: 0%;
-        align-items: center;
-        justify-content: center;
-    }
-
-.login-box {
-    margin-left: 20px;
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    flex: 1;
+    width: 100%;
 }
 
-h2 {
-    size: 20;
-    margin: 20px 0;
-    color: #333;
+.container-imgbanner img {
+    width: 90%;
+    height: 100%;
+}
+
+.container-img {
+    align-items: center;
+    border-color: linear-gradient(to right, #5292C1, #27455B);
+    padding: 20px;
+    height: 95px;
+}
+
+.container-img img {
+    height: 100%;
+    width: auto;
+}
+
+.container-combine {
+    display: flex;
+    margin-left: 0%;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-combine .container-img {
+    margin-bottom: 15px;
+    width: 15%;
+}
+
+.login-box {
+    margin-bottom: 7%;
+    width: 95%;
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 7%;
+    width: 20%;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
     margin-bottom: 15px;
 }
 
@@ -86,9 +95,9 @@ h2 {
 
 .input-group input {
     width: 100%;
-    height: 40px;
+    height: 30px;
     padding: 8px;
-    border-radius: 50px; /* Adjusted radius */
+    border-radius: 50px;
     border: 1px solid #ccc;
 }
 
@@ -96,68 +105,80 @@ h2 {
     margin: 15px 0 0;
 }
 
-/* label {
-    display: block;
-    margin-bottom: 5px;
-} */
-
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
+button {
+    width: 40%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    box-sizing: border-box;
-}
-
-button.btn {
-    background-color: white;
-    color: black;
-    padding: 10px 20px;
+    background-color: #5292C1;
+    color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 50px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-button.btn:hover {
-    background-color: white;
+button:hover {
+    background-color: #27455B;
 }
 
-a {
-    color: #333;
-    text-decoration: none;
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .container-imgbanner img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .container-combine {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .login-box {
+        width: 90%; /* Full width on mobile */
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+
+    .input-group input {
+        height: 40px; /* Larger input height for touch devices */
+        padding: 10px;
+    }
+
+    button {
+        width: 100%; /* Full width button on mobile */
+        padding: 15px;
+    }
 }
 
-.alert {
-    padding: 20px;
-    background-color: #f44336; /* Red */
-    color: white;
-    margin-bottom: 15px;
+@media (max-width: 480px) {
+    .header-bar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .header-bar .logo-atas {
+        max-width: 50px; /* Larger logo for visibility on mobile */
+    }
+
+    .container-img {
+        padding: 10px;
+    }
+
+    .login-box {
+        padding: 15px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 14px; /* Smaller font size for smaller screens */
+    }
 }
-
-.alert-success {
-    background-color: #4CAF50; /* Green */
-}
-
-.alert-danger {
-    background-color: #f44336; /* Red */
-}
-
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
-}
-
-
