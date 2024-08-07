@@ -378,7 +378,7 @@
     $('.delete-btn').click(function() {
         var id = $(this).data('id');
 
-        $('#deleteForm').on('submit', function(e) {
+        $('#deleteForm').off('submit').on('submit', function(e) {
             e.preventDefault();
 
             $.ajax({
@@ -398,6 +398,7 @@
         $('#deleteModal').modal('show');
     });
 });
+
         </script>
         
 </body>
