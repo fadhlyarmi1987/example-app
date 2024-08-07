@@ -40,7 +40,9 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.user
 
 // API LISTABSEN
 
-Route::get('/listabsen', [ListAbsenController::class, 'store']);
+Route::get('listabsen', [AbsensiController::class, 'listabsen']);
+Route::get('listabsen2/{id}', [AbsensiController::class, 'listAbsenByIdUser']);
+
 
 Route::post('/absen', [ListAbsenController::class, 'store']);
 
