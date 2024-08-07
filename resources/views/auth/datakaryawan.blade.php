@@ -194,7 +194,7 @@
     <script>
         $(document).ready(function() {
 
-            var baseUrl = 'http://192.168.100.37:8000/api/users';
+            var baseUrl = 'http://127.0.0.1:8000//api/users';
 
             function fetchData() {
                 $.ajax({
@@ -273,7 +273,7 @@
                         }, 1000); // Tunggu 2 detik sebelum reload halaman
                     },
                     error: function() {
-                        alert('Gagal memperbarui data.');
+                        toastr.error('Gagal memperbarui data');
                     }
                 });
             });
@@ -298,7 +298,7 @@
                         }, 1000);
                     },
                     error: function() {
-                        alert('Gagal menghapus data.');
+                        toastr.error('Gagal menghapus data');
                     }
                 });
             });

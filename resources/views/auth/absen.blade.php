@@ -229,9 +229,8 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Jabatan</th>
-                                    <th>Tanggal</th>
-                                    <th>Check in</th>
-                                    <th>Check Out</th>
+                                    <th>Keterangan</th>
+                                    <th>Tanggal Dan Waktu</th>
                                     <th>Lokasi</th>
                                 </tr>
                             </thead>
@@ -270,11 +269,10 @@
                             if (data.length > 0) {
                                 $.each(data, function(index, attendance) {
                                     attendanceTable.append('<tr><td>' + (index + 1) +
-                                        '</td><td>' + attendance.userid +
-                                        '</td><td>' + attendance.role +
+                                        '</td><td>' + attendance.name +
+                                        '</td><td>' + attendance.user_type +
+                                        '</td><td>' + attendance.typetime +
                                         '</td><td>' + attendance.time +
-                                        '</td><td>' + attendance.longitude +
-                                        '</td><td>' + attendance.latitude +
                                         '</td><td>' + attendance.kantorid +
                                         '</td></tr>');
                                 });

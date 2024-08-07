@@ -19,7 +19,6 @@ class ListAbsenController extends Controller
         $request->validate([
             'name' => 'string|max:255',
             'typetime' => 'string|max:255',
-            'role'=>'required|string|max:255',
             'time' => 'date_format:Y-m-d H:i:s',
             'latitude' => 'numeric|between:-90,90',
             'longitude' => 'numeric|between:-180,180',

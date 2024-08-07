@@ -240,7 +240,7 @@
                         modal.find('#editId').val(data.id);
                     },
                     error: function() {
-                        alert('Gagal mengambil data karyawan.');
+                        toastr.error('Gagal memperbarui data');
                     }
                 });
             });
@@ -293,7 +293,7 @@
                         }, 1000);
                     },
                     error: function() {
-                        toastr.error('Gagal menghapus data');;
+                        toastr.error('Gagal menghapus data');
                     }
                 });
             });
