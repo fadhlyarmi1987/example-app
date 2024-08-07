@@ -22,4 +22,10 @@ class AbsensiController extends Controller
     return response()->json($listabsen);
 }
 
+    public function listAbsenByIdUser($id)
+    {
+        $listabsen = ListAbsen::orderBy('time', 'DESC')->where('userid', $id)->get();
+        return response()->json($listabsen);
+    }
+
 }
