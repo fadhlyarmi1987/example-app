@@ -24,12 +24,12 @@ class ListAbsenController extends Controller
             'longitude' => 'numeric|between:-180,180',
             'kantorid' => 'string|max:255'
         ]);
-
+        $time = date('Y-m-d H:i:s');
         // Simpan data
         $listAbsen = new ListAbsen();
         $listAbsen->name = $request->input('name');
         $listAbsen->typetime = $request->input('typetime');
-        $listAbsen->time = $request->input('time');
+        $listAbsen->time = $time;
         $listAbsen->latitude = $request->input('latitude');
         $listAbsen->longitude = $request->input('longitude');
         $listAbsen->kantorid = $request->input('kantorid');
