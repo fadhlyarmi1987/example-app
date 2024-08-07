@@ -24,7 +24,9 @@ class ListAbsenController extends Controller
             'longitude' => 'numeric|between:-180,180',
             'kantorid' => 'string|max:255'
         ]);
+
         $time = date('Y-m-d H:i:s');
+
         // Simpan data
         $listAbsen = new ListAbsen();
         $listAbsen->name = $request->input('name');
@@ -45,7 +47,8 @@ class ListAbsenController extends Controller
 
     public function show(Request $request)
     {
-        $date = $request->query('date');
+        date_default_timezone_set('Asia/Jakarta');
+        $userid = $request->query('userid');
 
         if ($date) {
             $absen = ListAbsen::whereDate('time', $date)->get();
