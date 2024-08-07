@@ -323,84 +323,35 @@
 
         <script>
             $(document).ready(function() {
-    // Handle form submission for new notification
-    $('form').on('submit', function(e) {
-        e.preventDefault();
-        
-        $.ajax({
-            url: '/api/notifications',
-            type: 'POST',
-            data: {
-                pengumuman: $('#pengumuman').val(),
-            },
-            success: function(response) {
-                // Reload the page to reflect the new notification
-                location.reload();
-            },
-            error: function(xhr) {
-                // Handle error (optional)
-                console.log(xhr.responseText);
-            }
-        });
-    });
+                // Handler for edit button
+                $('.edit-btn').click(function() {
+                    var id = $(this).data('id');
+                    var pengumuman = $(this).data('pengumuman');
+                    var tanggal_unggah = $(this).data('tanggal_unggah');
+                    var url = "{{ route('notifications.update', ':id') }}";
+                    url = url.replace(':id', id);
 
-    // Handler for edit button
-    $('.edit-btn').click(function() {
-        var id = $(this).data('id');
-        var pengumuman = $(this).data('pengumuman');
+                    $('#editForm').attr('action', url);
+                    $('#editId').val(id);
+                    $('#editText').val(pengumuman);
+                    $('#editDate').val(tanggal_unggah);
+                    $('#editModal').modal('show');
+                });
 
-        $('#editText').val(pengumuman);
+                // Handler for delete button
+                $('.delete-btn').click(function() {
+                    var id = $(this).data('id');
+                    var url = "{{ route('notifications.destroy', ':id') }}";
+                    url = url.replace(':id', id);
 
-        $('#editForm').off('submit').on('submit', function(e) {
-            e.preventDefault();
+                    $('#deleteForm').attr('action', url);
+                    $('#deleteId').val(id);
+                    $('#deleteModal').modal('show');
+                });
 
-            $.ajax({
-                url: '/api/notifications/' + id,
-                type: 'PUT',
-                data: {
-                    pengumuman: $('#editText').val(),
-                },
-                success: function(response) {
-                    // Reload the page to reflect the updated notification
-                    location.reload();
-                },
-                error: function(xhr) {
-                    // Handle error (optional)
-                    console.log(xhr.responseText);
-                }
             });
-        });
-
-        $('#editModal').modal('show');
-    });
-
-    // Handler for delete button
-    $('.delete-btn').click(function() {
-        var id = $(this).data('id');
-
-        $('#deleteForm').off('submit').on('submit', function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: '/api/notifications/' + id,
-                type: 'DELETE',
-                success: function(response) {
-                    // Reload the page to reflect the deletion
-                    location.reload();
-                },
-                error: function(xhr) {
-                    // Handle error (optional)
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-
-        $('#deleteModal').modal('show');
-    });
-});
-
         </script>
-        
+
 </body>
 
 </html>

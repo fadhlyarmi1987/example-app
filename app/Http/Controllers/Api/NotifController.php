@@ -8,36 +8,40 @@ use Illuminate\Http\Request;
 
 class NotifController extends Controller
 {
-    public function index()
+    public function apiIndex()
     {
         $notifications = Notification::all();
         return response()->json($notifications);
     }
 
-    public function store(Request $request)
+    // Metode untuk membuat notifikasi baru
+    public function apiStore(Request $request)
     {
-        $notification = Notification::create([
-            'pengumuman' => $request->pengumuman,
+        $request->validate([
+            'pengumuman' => 'required|string',
         ]);
 
+        $notification = Notification::create($request->all());
         return response()->json($notification, 201);
     }
 
-    public function update(Request $request, $id)
+    // Metode untuk mengupdate notifikasi yang ada
+    public function apiUpdate(Request $request, $id)
     {
-        $notification = Notification::findOrFail($id);
-        $notification->update([
-            'pengumuman' => $request->pengumuman,
+        $request->validate([
+            'pengumuman' => 'required|string',
         ]);
 
+        $notification = Notification::findOrFail($id);
+        $notification->update($request->all());
         return response()->json($notification);
     }
 
-    public function destroy($id)
+    // Metode untuk menghapus notifikasi
+    public function apiDestroy($id)
     {
         $notification = Notification::findOrFail($id);
         $notification->delete();
-
         return response()->json(null, 204);
     }
 }

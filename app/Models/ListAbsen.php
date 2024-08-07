@@ -12,7 +12,7 @@ class Listabsen extends Model
     protected $table = 'listabsen';
 
     protected $fillable = [
-        'userid',
+        'name',
         'typetime',
         'time',
         'role',
