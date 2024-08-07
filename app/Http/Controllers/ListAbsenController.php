@@ -17,7 +17,8 @@ class ListAbsenController extends Controller
     {
         // Validasi input
         $request->validate([
-            'name' => 'required|string|max:255',
+            //'userid' => ['numeric','not_in:0'],
+            'name' => 'string|max:255',
             'typetime' => 'string|max:255',
             'time' => 'date_format:Y-m-d H:i:s',
             'latitude' => 'numeric|between:-90,90',
@@ -29,6 +30,7 @@ class ListAbsenController extends Controller
 
         // Simpan data
         $listAbsen = new ListAbsen();
+        $listAbsen->userid = $request->input('userid');
         $listAbsen->name = $request->input('name');
         $listAbsen->typetime = $request->input('typetime');
         $listAbsen->time = $time;
