@@ -9,10 +9,11 @@ class Listabsen extends Model
 {
     use HasFactory;
 
-    protected $table = 'listabsen';
+    protected $table = 'listabsen1';
 
     protected $fillable = [
         'userid',
+        'name',
         'typetime',
         'time',
         'role',

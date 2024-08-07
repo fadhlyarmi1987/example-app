@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ListAbsen; // Pastikan Anda membuat model untuk tabel ini
+use App\Models\ListAbsen;
 
 class ListAbsenController extends Controller
 {
@@ -17,18 +17,18 @@ class ListAbsenController extends Controller
     {
         // Validasi input
         $request->validate([
-            'userid' => 'required|string|max:255',
-            'typetime' => 'required|string|max:255',
+            'name' => 'string|max:255',
+            'typetime' => 'string|max:255',
             'role'=>'required|string|max:255',
-            'time' => 'required|date_format:Y-m-d H:i:s',
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
-            'kantorid' => 'required|integer'
+            'time' => 'date_format:Y-m-d H:i:s',
+            'latitude' => 'numeric|between:-90,90',
+            'longitude' => 'numeric|between:-180,180',
+            'kantorid' => 'string|max:255'
         ]);
 
         // Simpan data
         $listAbsen = new ListAbsen();
-        $listAbsen->userid = $request->input('userid');
+        $listAbsen->name = $request->input('name');
         $listAbsen->typetime = $request->input('typetime');
         $listAbsen->time = $request->input('time');
         $listAbsen->latitude = $request->input('latitude');
