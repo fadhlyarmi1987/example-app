@@ -25,11 +25,13 @@ class ListAbsenController extends Controller
             'kantorid' => 'string|max:255'
         ]);
 
+        $time = date('Y-m-d H:i:s');
+
         // Simpan data
         $listAbsen = new ListAbsen();
         $listAbsen->name = $request->input('name');
         $listAbsen->typetime = $request->input('typetime');
-        $listAbsen->time = $request->input('time');
+        $listAbsen->time = $time;
         $listAbsen->latitude = $request->input('latitude');
         $listAbsen->longitude = $request->input('longitude');
         $listAbsen->kantorid = $request->input('kantorid');
@@ -44,6 +46,7 @@ class ListAbsenController extends Controller
 
     public function show(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
         $userid = $request->query('userid');
 
         if ($userid) {
