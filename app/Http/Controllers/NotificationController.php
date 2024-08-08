@@ -15,7 +15,7 @@ class NotificationController extends Controller
 
     public function index()
     {
-        $notifications = Notification::all();
+        $notifications = Notification::orderBy('created_at', 'desc')->paginate(10);
         return view('auth.notif', compact('notifications'));
     }
 
