@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
-    <link rel="stylesheet" href="{{ asset('css/datamagang1.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/datakaryawan1.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -15,8 +16,21 @@
         }
 
         .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 280px;
+            height: auto;
+        }
 
+        .sidebar-content {
+            flex-grow: 1;
+            min-height: 400px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 340px;
         }
 
         .content-container {
@@ -28,14 +42,6 @@
             width: 100%;
             margin-top: 40px;
             /* margin-left: 25px; */
-        }
-
-        .content h2 {
-            font-size: 35px;
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: 1000;
-            margin: 0;
-            color: #000000
         }
 
         .header-bar {
@@ -76,10 +82,13 @@
             padding: 15px;
         }
 
+
         /* Table Styles */
         .table {
-            width: 100%;
+            width: 95%;
             border-collapse: collapse;
+            margin-left: 30px;
+            margin-top: 30px;
         }
 
         .table th,
@@ -113,6 +122,7 @@
         .btn-info {
             background-color: #28a745;
             color: #fff;
+            margin-left: 0px;
         }
 
         .btn-danger {
@@ -130,8 +140,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
+
+        /* .header h3 {
+            font-size: 40px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 1000;
+            margin: 50%;
+            color: #fff
+        } */
 
         .header h1 {
             font-size: 40px;
@@ -151,59 +169,65 @@
         </div>
     </header>
     <div class="main-container">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
-            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="karyawan"></use>
-                        </svg>
-                        Data Karyawan
-                    </a>
-                </li>
-                <li>
-                    <a href="magang" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="magang"></use>
-                        </svg>
-                        Data Magang
-                    </a>
-                </li>
-                <li>
-                    <a href="absen" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="absen"></use>
-                        </svg>
-                        List Absensi
-                    </a>
-                </li>
-                <a href="notifications" class="nav-link active">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="notifications"></use>
-                    </svg>
-                    Notifikasi
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light sidebar">
+            <div class="sidebar-content">
+                <a href=""
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
                 </a>
-                </li>
-                <li>
-                    <a href="tugas" class="nav-link text-black">
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="karyawan"></use>
+                            </svg>
+                            Data Karyawan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="magang" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="magang"></use>
+                            </svg>
+                            Data Magang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="absen" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="absen"></use>
+                            </svg>
+                            List Absensi
+                        </a>
+                    </li>
+                    <a href="notifications" class="nav-link active">
                         <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="tugas"></use>
+                            <use xlink:href="notifications"></use>
                         </svg>
-                        Tugas
+                        Notifikasi
                     </a>
-                </li>
-
-            </ul>
-            <hr>
-            <a href="login" class="nav-link text-black">
-                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>Keluar</strong>
-            </a>
+                    </li>
+                    <li>
+                        <a href="tugas" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="tugas"></use>
+                            </svg>
+                            Tugas
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+            <div class="sidebar-footer">
+                <a href="login" class="nav-link text-black mt-auto">
+                    <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
+                        class="rounded-circle me-2">
+                    <strong>Keluar</strong>
+                </a>
+            </div>
         </div>
+
 
         <div class="main-content">
             <div class="header">
@@ -234,25 +258,30 @@
                             </thead>
                             <tbody>
                                 @foreach ($notifications as $notification)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $notification->pengumuman }}</td>
-                                    <td>{{ $notification->created_at }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-info edit-btn" data-id="{{ $notification->id }}" data-pengumuman="{{ $notification->pengumuman }}" data-tanggal_unggah="{{ $notification->created_at->format('Y-m-d') }}">
-                                            Edit
-                                        </button>
-                                        <form action="{{ route('notifications.destroy', $notification->id) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="{{ $notification->id }}">
-                                                Delete
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $notification->pengumuman }}</td>
+                                        <td>{{ $notification->created_at }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info edit-btn"
+                                                data-id="{{ $notification->id }}"
+                                                data-pengumuman="{{ $notification->pengumuman }}"
+                                                data-tanggal_unggah="{{ $notification->created_at->format('Y-m-d') }}">
+                                                Edit
                                             </button>
-                                        </form>
-                                    </td>
+                                            <form action="{{ route('notifications.destroy', $notification->id) }}"
+                                                method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger delete-btn"
+                                                    data-id="{{ $notification->id }}">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
 
 
-                                </tr>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -263,7 +292,8 @@
         </div>
 
         <!-- Modal Edit -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -291,7 +321,8 @@
         </div>
 
         <!-- Modal Delete -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

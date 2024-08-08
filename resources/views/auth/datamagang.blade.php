@@ -18,58 +18,63 @@
         </div>
     </header>
     <div class="main-container">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
-            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="karyawan"></use>
-                        </svg>
-                        Data Karyawan
-                    </a>
-                </li>
-                <li>
-                    <a href="magang" class="nav-link active">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="magang"></use>
-                        </svg>
-                        Data Magang
-                    </a>
-                </li>
-                <li>
-                    <a href="absen" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="absen"></use>
-                        </svg>
-                        List Absensi
-                    </a>
-                </li>
-                <a href="notifications" class="nav-link text-black">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="notifications"></use>
-                    </svg>
-                    Notifikasi
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light sidebar">
+            <div class="sidebar-content">
+                <a href=""
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
                 </a>
-                </li>
-                <li>
-                    <a href="tugas" class="nav-link text-black">
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="karyawan"></use>
+                            </svg>
+                            Data Karyawan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="magang" class="nav-link active">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="magang"></use>
+                            </svg>
+                            Data Magang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="absen" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="absen"></use>
+                            </svg>
+                            List Absensi
+                        </a>
+                    </li>
+                    <a href="notifications" class="nav-link text-black">
                         <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="tugas"></use>
+                            <use xlink:href="notifications"></use>
                         </svg>
-                        Tugas
+                        Notifikasi
                     </a>
-                </li>
-            </ul>
-            <hr>
-            <a href="login" class="nav-link text-black">
-                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
-                    class="rounded-circle me-2">
-                <strong>Keluar</strong>
-            </a>
+                    </li>
+                    <li>
+                        <a href="tugas" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="tugas"></use>
+                            </svg>
+                            Tugas
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+            <div class="sidebar-footer">
+                <a href="login" class="nav-link text-black mt-auto">
+                    <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
+                        class="rounded-circle me-2">
+                    <strong>Keluar</strong>
+                </a>
+            </div>
         </div>
 
         <div class="main-content">

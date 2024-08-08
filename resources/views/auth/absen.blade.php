@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CV NATUSI</title>
-    <link rel="stylesheet" href="{{ asset('css/datamagang1.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datakaryawan.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -16,7 +16,21 @@
         }
 
         .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 280px;
+            height: auto;
+        }
+
+        .sidebar-content {
+            flex-grow: 1;
+            min-height: 400px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 340px;
         }
 
         .content-container {
@@ -110,10 +124,10 @@
             font-size: 12px;
         }
 
-        .btn-info {
+        /* .btn-info {
             background-color: #28a745;
             color: #fff;
-        }
+        } */
 
         .btn-danger {
             background-color: #dc3545;
@@ -150,62 +164,63 @@
         </div>
     </header>
     <div class="main-container">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light" style="width: 280px; height:100vh">
-            <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="karyawan"></use>
-                        </svg>
-                        Data Karyawan
-                    </a>
-                </li>
-                <li>
-                    <a href="magang" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="magang"></use>
-                        </svg>
-                        Data Magang
-                    </a>
-                </li>
-                <li>
-                    <a href="absen" class="nav-link active">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="absen"></use>
-                        </svg>
-                        List Absensi
-                    </a>
-                </li>
-                <li>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light sidebar">
+            <div class="sidebar-content">
+                <a href=""
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <img style="width: 100%" src="{{ asset('IMG/LOGO.png') }}" alt="">
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="karyawan" class="nav-link text-black" text-black aria-current="page">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="karyawan"></use>
+                            </svg>
+                            Data Karyawan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="magang" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="magang"></use>
+                            </svg>
+                            Data Magang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="absen" class="nav-link active">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="absen"></use>
+                            </svg>
+                            List Absensi
+                        </a>
+                    </li>
                     <a href="notifications" class="nav-link text-black">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="notifications"></use>
                         </svg>
                         Notifikasi
                     </a>
-                </li>
-                <li>
-                    <a href="tugas" class="nav-link text-black">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="tugas"></use>
-                        </svg>
-                        Tugas
-                    </a>
-                </li>
-
-            </ul>
-            <hr>
-
-            <a href="login" class="nav-link text-black">
-                <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
-                    class="rounded-circle me-2">
-                <strong>Keluar</strong>
-            </a>
-
+                    </li>
+                    <li>
+                        <a href="tugas" class="nav-link text-black">
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="tugas"></use>
+                            </svg>
+                            Tugas
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+            <div class="sidebar-footer">
+                <a href="login" class="nav-link text-black mt-auto">
+                    <img src="{{ asset('IMG/UltramanNeos_07.png') }}" alt="" width="32" height="32"
+                        class="rounded-circle me-2">
+                    <strong>Keluar</strong>
+                </a>
+            </div>
         </div>
 
         <div class="main-content">
