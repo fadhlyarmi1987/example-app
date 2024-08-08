@@ -15,12 +15,12 @@ class CreateListabsenTable extends Migration
     {
         Schema::create('listabsen', function (Blueprint $table) {
             $table->id();
-            $table->string('userid');
+            $table->string('name');
             $table->string('typetime', 50);
             $table->timestamp('time');
             $table->decimal('longitude', 10, 7);
             $table->decimal('latitude', 10, 7);
-            $table->unsignedBigInteger('kantorid');
+            $table->string('kantorid');
             $table->timestamps();
         });
     }
