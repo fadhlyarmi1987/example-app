@@ -39,6 +39,7 @@ Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth')-
 
 Route::get('/unduh/{id}', [FileController::class, 'download'])->name('file.download');
 
+Route::get('/notifications/data', [NotificationController::class, 'data'])->name('notifications.data');
 
 
 //method POST

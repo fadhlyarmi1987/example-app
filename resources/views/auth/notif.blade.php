@@ -80,6 +80,7 @@
 
         .card-body {
             padding: 15px;
+
         }
 
 
@@ -259,7 +260,8 @@
                             <tbody>
                                 @foreach ($notifications as $notification)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $loop->iteration + ($notifications->currentPage() - 1) * $notifications->perPage() }}
+                                        </td>
                                         <td>{{ $notification->pengumuman }}</td>
                                         <td>{{ $notification->created_at }}</td>
                                         <td>
@@ -279,109 +281,112 @@
                                                 </button>
                                             </form>
                                         </td>
-
-
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
 
+                        <nav aria-label="Page navigation">
+                                {{ $notifications->links() }}
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal Edit -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Pengumuman</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form id="editForm" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-body">
-                            <input type="hidden" id="editId" name="id">
-                            <div class="form-group">
-                                <label for="editText">Pengumuman</label>
-                                <textarea class="form-control" id="editText" name="pengumuman" rows="3"></textarea>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Pengumuman</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form id="editForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <input type="hidden" id="editId" name="id">
+                        <div class="form-group">
+                            <label for="editText">Pengumuman</label>
+                            <textarea class="form-control" id="editText" name="pengumuman" rows="3"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
-        <!-- Modal Delete -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Penghapusan</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form id="deleteForm" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <div class="modal-body">
-                            <p>Apakah Anda yakin ingin menghapus pengumuman ini?</p>
-                            <input type="hidden" id="deleteId" name="id">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </div>
-                    </form>
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Penghapusan</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin ingin menghapus pengumuman ini?</p>
+                        <input type="hidden" id="deleteId" name="id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
 
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // Handler for edit button
-                $('.edit-btn').click(function() {
-                    var id = $(this).data('id');
-                    var pengumuman = $(this).data('pengumuman');
-                    var tanggal_unggah = $(this).data('tanggal_unggah');
-                    var url = "{{ route('notifications.update', ':id') }}";
-                    url = url.replace(':id', id);
+    <script>
+        $(document).ready(function() {
+            // Handler for edit button
+            $('.edit-btn').click(function() {
+                var id = $(this).data('id');
+                var pengumuman = $(this).data('pengumuman');
+                var tanggal_unggah = $(this).data('tanggal_unggah');
+                var url = "{{ route('notifications.update', ':id') }}";
+                url = url.replace(':id', id);
 
-                    $('#editForm').attr('action', url);
-                    $('#editId').val(id);
-                    $('#editText').val(pengumuman);
-                    $('#editDate').val(tanggal_unggah);
-                    $('#editModal').modal('show');
-                });
-
-                // Handler for delete button
-                $('.delete-btn').click(function() {
-                    var id = $(this).data('id');
-                    var url = "{{ route('notifications.destroy', ':id') }}";
-                    url = url.replace(':id', id);
-
-                    $('#deleteForm').attr('action', url);
-                    $('#deleteId').val(id);
-                    $('#deleteModal').modal('show');
-                });
-
+                $('#editForm').attr('action', url);
+                $('#editId').val(id);
+                $('#editText').val(pengumuman);
+                $('#editDate').val(tanggal_unggah);
+                $('#editModal').modal('show');
             });
-        </script>
+
+            // Handler for delete button
+            $('.delete-btn').click(function() {
+                var id = $(this).data('id');
+                var url = "{{ route('notifications.destroy', ':id') }}";
+                url = url.replace(':id', id);
+
+                $('#deleteForm').attr('action', url);
+                $('#deleteId').val(id);
+                $('#deleteModal').modal('show');
+            });
+
+        });
+    </script>
 
 </body>
 
