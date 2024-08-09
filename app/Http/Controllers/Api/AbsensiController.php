@@ -25,7 +25,6 @@ class AbsensiController extends Controller
 
         // Simpan data
         $listAbsen = new ListAbsen();
-        $listAbsen->userid = $request->input('userid');
         $listAbsen->name = $request->input('name');
         $listAbsen->typetime = $request->input('typetime');
         $listAbsen->time = $time;
@@ -57,7 +56,7 @@ class AbsensiController extends Controller
 
     public function listAbsenByIdUser($id)
     {
-        $listabsen = ListAbsen::orderBy('time', 'DESC')->where('userid', $id)->get();
+        $listabsen = ListAbsen::orderBy('time', 'DESC')->where('name', $id)->get();
         return response()->json($listabsen);
     }
 
