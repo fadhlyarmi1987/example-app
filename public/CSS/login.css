@@ -41,19 +41,19 @@ body {
 }
 
 .container-imgbanner img {
-    width: 92%;
+    width: 94%;
     height: 100%;
 }
 
 .container-img {
     align-items: center;
     border-color: linear-gradient(to right, #5292C1, #27455B);
-    padding: 20px;
+    padding: 50px;
     height: 95px;
 }
 
 .container-img img {
-    height: 100%;
+    height: 110%;
     width: auto;
 }
 
