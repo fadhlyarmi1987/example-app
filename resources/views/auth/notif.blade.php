@@ -160,6 +160,37 @@
             margin: 0;
             color: #fff
         }
+
+        .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination .page-item {
+    margin: 0 2px; /* Reduce the space between buttons */
+}
+
+.pagination .page-link {
+    font-size: 12px; /* Reduce the font size */
+    padding: 4px 8px; /* Reduce padding */
+    border-radius: 4px; /* Border radius for rounding */
+    color: #007bff; /* Link color */
+    text-decoration: none;
+}
+
+.pagination .page-link:hover {
+    background-color: #f0f0f0; /* Background on hover */
+    color: #0056b3; /* Text color on hover */
+}
+
+.pagination .active .page-link {
+    background-color: #007bff;
+    color: white;
+}
+
+
+
     </style>
 
 </head>
@@ -289,9 +320,26 @@
 
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
-                                {{ $notifications->links() }}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $notifications->previousPageUrl() }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                @foreach ($notifications->links() as $link)
+                                    <li class="page-item {{ $link->active ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $link->url }}">{{ $link->label }}</a>
+                                    </li>
+                                @endforeach
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $notifications->nextPageUrl() }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
+
+
+
                     </div>
                 </div>
             </div>

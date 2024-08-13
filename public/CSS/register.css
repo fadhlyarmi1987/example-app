@@ -4,7 +4,7 @@ body {
     background-image: linear-gradient(to right, #5292C1, #27455B);
     margin: 0;
     padding: 0;
-    height: auto;
+    height: flex;
     display: flex;
     flex-direction: column;
 }
