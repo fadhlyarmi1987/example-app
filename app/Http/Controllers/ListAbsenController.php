@@ -52,8 +52,8 @@ class ListAbsenController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $userid = $request->query('userid');
 
-        if ($date) {
-            $absen = ListAbsen::whereDate('time', $date)->get();
+        if ($request) {
+            $absen = ListAbsen::whereDate('time', $request)->get();
             if ($absen->isEmpty()) {
                 return response()->json(['message' => 'Data tidak ditemukan'], 404);
             }
@@ -62,5 +62,32 @@ class ListAbsenController extends Controller
         }
 
         return response()->json($absen, 200);
+    }
+
+    public function update(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'new_name' => 'required|string|max:255',
+        ]);
+
+        // Ambil nilai yang ada dan yang baru dari request
+        $oldName = $request->input('name');
+        $newName = $request->input('new_name');
+
+        // Temukan entri dengan nama lama dan perbarui nama menjadi nama baru
+        $updatedRows = ListAbsen::where('name', $oldName)
+            ->update(['name' => $newName]);
+
+        if ($updatedRows === 0) {
+            return response()->json(['message' => 'Data tidak ditemukan atau sudah diperbarui'], 404);
+        }
+
+        // Response
+        return response()->json([
+            'message' => 'Data successfully updated',
+            'updated_count' => $updatedRows
+        ], 200);
     }
 }

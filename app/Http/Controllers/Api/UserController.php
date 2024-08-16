@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ListAbsenController;
+use App\Models\Listabsen;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +18,7 @@ class UserController extends Controller
 
         $users = User::all();
 
-    return response()->json($users);
+        return response()->json($users);
     }
 
     public function show($id)
@@ -117,39 +119,35 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        // Validasi input
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'user_type' => 'required|string|in:Karyawan,Magang',
         ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Update failed. Please check your data.',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
+    
+        // Temukan entri yang akan diperbarui di tabel users
         $user = User::find($id);
         if (!$user) {
-            return response()->json([
-                'success' => false,
-                'message' => 'User not found.',
-            ], 404);
+            return response()->json(['message' => 'User tidak ditemukan'], 404);
         }
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->user_type = $request->user_type;
+    
+        // Perbarui nama dan email pengguna
+        $oldName = $user->name;
+        $newName = $request->input('name');
+        $user->name = $newName;
+        $user->email = $request->input('email');
         $user->save();
-
+    
+        // Perbarui nama di tabel listabsen
+        ListAbsen::where('name', $oldName)->update(['name' => $newName]);
+    
+        // Response
         return response()->json([
-            'success' => true,
-            'message' => 'Data successfully updated.',
+            'message' => 'Data berhasil diperbarui',
             'data' => $user
         ], 200);
     }
+    
 
     public function destroy($id)
     {

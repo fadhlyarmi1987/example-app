@@ -43,6 +43,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.user
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
 Route::get('listabsen2/{name}', [AbsensiController::class, 'listAbsenByIdUser']);
 Route::post('absen', [AbsensiController::class, 'store']);
+Route::put('listabsen/updatename', [ListAbsenController::class, 'update']);
 
 // API TUGAS
 
@@ -64,3 +65,8 @@ Route::post('/notifications', [NotifController::class, 'apiStore']);
 Route::put('/notifications/{id}', [NotifController::class, 'apiUpdate']);
 
 Route::delete('/notifications/{id}', [NotifController::class, 'apiDestroy']);
+
+
+Route::get('/server-time', function () {
+    return response()->json(['server_time' => now()->toIso8601String()]);
+});

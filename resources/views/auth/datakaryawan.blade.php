@@ -193,12 +193,12 @@
     <script>
         $(document).ready(function() {
 
-            var baseUrl = 'http://127.0.0.1:8000/api/users';
+            var baseUrl = 'http://192.168.2.70:8000/api/users';
 
             function fetchData() {
 
                 $.ajax({
-                    url: 'http://127.0.0.1:8000//api/users?user_type=karyawan',
+                    url: 'http://192.168.2.70:8000/api//users?user_type=karyawan',
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -270,7 +270,7 @@
                         toastr.success('Data berhasil diperbarui');
                         setTimeout(function() {
                             location.reload();
-                        }, 1000); // Tunggu 2 detik sebelum reload halaman
+                        }, 1000); 
                     },
                     error: function() {
                         toastr.error('Gagal memperbarui data');
