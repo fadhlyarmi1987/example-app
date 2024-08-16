@@ -41,7 +41,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('api.user
 // API LISTABSEN
 
 Route::get('listabsen', [AbsensiController::class, 'listabsen']);
-Route::get('listabsen2/{id}', [AbsensiController::class, 'listAbsenByIdUser']);
+Route::get('listabsen2/{name}', [AbsensiController::class, 'listAbsenByIdUser']);
 Route::post('absen', [AbsensiController::class, 'store']);
 
 // API TUGAS
