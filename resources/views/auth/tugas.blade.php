@@ -30,7 +30,7 @@
 
         .sidebar-footer {
             margin-top: auto;
-            padding-top: 340px;
+            padding-top: 418px;
         }
 
         .content-container {
